@@ -72,7 +72,6 @@ class _IntroScreenState extends State<IntroScreen> {
   }
 
   void onDonePress() {
-    print("object");
     final pref = SharedPreferences.getInstance();
     pref.then((SharedPreferences prefs) {
       final data = jsonEncode({

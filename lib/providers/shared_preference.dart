@@ -14,12 +14,10 @@ class SharedPreference extends ChangeNotifier {
   }
 
   String get selectedCourseData {
-    print(selectedCourse);
     return selectedCourse;
   }
 
   bool get isSeenScreen {
-    print(isSeen);
     return isSeen;
   }
 }
