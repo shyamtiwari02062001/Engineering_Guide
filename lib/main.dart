@@ -23,13 +23,20 @@ class MyApp extends StatelessWidget {
       child: Consumer<SharedPreference>(
         builder: (ctx, val, _) => MaterialApp(
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.amber)
-                .copyWith(secondary: Colors.lightGreenAccent),
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.indigo,
+            ).copyWith(secondary: Colors.lightGreenAccent),
           ),
           home: FutureBuilder(
             future: val.sharedData(),
             builder: (ctx, snapshot) =>
-                val.isSeenScreen ? const Dashboard() : const IntroScreen(),
+                snapshot.connectionState == ConnectionState.waiting
+                    ? const Center(
+                        child: Text("loading...."),
+                      )
+                    : val.isSeenScreen
+                        ? const Dashboard()
+                        : const IntroScreen(),
           ),
           debugShowCheckedModeBanner: false,
           routes: {

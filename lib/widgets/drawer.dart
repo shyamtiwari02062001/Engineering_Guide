@@ -6,51 +6,59 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        children: [
-          Container(
-            height: 150,
-            color: Colors.amber,
-            child: const Center(
-              child: Text("Drawer"),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 150,
+              color: Colors.indigo,
+              child: const Center(
+                child: Text(
+                  "Drawer",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.description),
-            title: Text("Syllabus"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.menu_book),
-            title: Text("Books"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.assignment),
-            title: Text("Question Papers"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.date_range),
-            title: Text("Accedemic Calender"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.event),
-            title: Text("Holiday List"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.follow_the_signs),
-            title: Text("Carrer Path"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
-          ),
-          Divider(),
-        ],
+            const ListTile(
+              leading: Icon(Icons.description),
+              title: Text("Syllabus"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.menu_book),
+              title: Text("Books"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.assignment),
+              title: Text("Question Papers"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.date_range),
+              title: Text("Accedemic Calender"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.event),
+              title: Text("Accedemic Calender"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.follow_the_signs),
+              title: Text("Carrer Path"),
+            ),
+            const Divider(),
+            const ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+            ),
+            const Divider(),
+          ],
+        ),
       ),
     );
   }
