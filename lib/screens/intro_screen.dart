@@ -77,6 +77,7 @@ class _IntroScreenState extends State<IntroScreen> {
       final data = jsonEncode({
         "isSeen": true,
         "setSelected": selectedValue,
+        "semIndex": 1,
       });
       prefs.setString("value", data);
     });

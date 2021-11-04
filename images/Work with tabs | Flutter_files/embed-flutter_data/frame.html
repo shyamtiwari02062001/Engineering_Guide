@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<!-- Copyright (c) 2014, the Dart project authors.  Please see the AUTHORS file
+     for details. All rights reserved. Use of this source code is governed by a
+     BSD-style license that can be found in the LICENSE file. -->
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 12pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+    <script src="frame_data/frame.js"></script>
+    <style id="styleId"></style>
+    
+<script id="require" src="frame_data/require.js"></script><script id="compiledJsScript">var testKey = '__TESTRESULT__ ';
+
+function dartPrint(message) {
+  if (message.startsWith(testKey)) {
+    var resultMsg = JSON.parse(message.substring(testKey.length));
+    resultMsg.sender = 'frame';
+    resultMsg.type = 'testResult';
+    parent.postMessage(resultMsg, '*');
+  } else {
+    parent.postMessage(
+      {'sender': 'frame', 'type': 'stdout', 'message': message.toString()}, '*');
+  }
+}
+
+// Unload previous version.
+require.undef('dartpad_main');
+
+var _thrownDartMainRunner = false;
+
+window.onerror = function(message, url, lineNumber, colno, error) {
+  if (!_thrownDartMainRunner) {
+    var errorMessage = '';
+    if (error != null) {
+      errorMessage = 'Error: ' + error;
+    } 
+    parent.postMessage(
+      {'sender': 'frame', 'type': 'stderr', 'message': message + errorMessage}, '*');
+  }
+  _thrownDartMainRunner = false;
+};
+
+require.config({
+  "baseUrl": "https://storage.googleapis.com/nnbd_artifacts/2.14.4/",
+  "waitSeconds": 60
+});
+
+define('dartpad_main', ['dart_sdk', 'flutter_web'], (function load__dartpad_main(dart_sdk, flutter_web) {
+  'use strict';
+  const core = dart_sdk.core;
+  const ui = dart_sdk.ui;
+  const async = dart_sdk.async;
+  const js = dart_sdk.js;
+  const html = dart_sdk.html;
+  const _internal = dart_sdk._internal;
+  const typed_data = dart_sdk.typed_data;
+  const _js_helper = dart_sdk._js_helper;
+  const collection = dart_sdk.collection;
+  const _interceptors = dart_sdk._interceptors;
+  const js_util = dart_sdk.js_util;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const app = flutter_web.src__material__app;
+  const tab_controller = flutter_web.src__material__tab_controller;
+  const scaffold = flutter_web.src__material__scaffold;
+  const app_bar = flutter_web.src__material__app_bar;
+  const tabs = flutter_web.src__material__tabs;
+  const framework = flutter_web.src__widgets__framework;
+  const recognizer = flutter_web.src__gestures__recognizer;
+  const edge_insets = flutter_web.src__painting__edge_insets;
+  const icon = flutter_web.src__widgets__icon;
+  const icon_data = flutter_web.src__widgets__icon_data;
+  const text = flutter_web.src__widgets__text;
+  const binding = flutter_web.src__widgets__binding;
+  const message_codecs = flutter_web.src__services__message_codecs;
+  const message_codec = flutter_web.src__services__message_codec;
+  const binary_messenger = flutter_web.src__services__binary_messenger;
+  const assertions = flutter_web.src__foundation__assertions;
+  const system_navigator = flutter_web.src__services__system_navigator;
+  const basic = flutter_web.src__widgets__basic;
+  const stack = flutter_web.src__rendering__stack;
+  const platform_view = flutter_web.src__widgets__platform_view;
+  const basic_types = flutter_web.src__foundation__basic_types;
+  const platform_view$ = flutter_web.src__rendering__platform_view;
+  const platform_views = flutter_web.src__services__platform_views;
+  const system_channels = flutter_web.src__services__system_channels;
+  const events = flutter_web.src__gestures__events;
+  const platform_channel = flutter_web.src__services__platform_channel;
+  var bootstrap = Object.create(dart.library);
+  var flutter_web_plugins = Object.create(dart.library);
+  var generated_plugin_registrant = Object.create(dart.library);
+  var main = Object.create(dart.library);
+  var js_url_strategy = Object.create(dart.library);
+  var url_strategy = Object.create(dart.library);
+  var utils = Object.create(dart.library);
+  var plugin_event_channel = Object.create(dart.library);
+  var plugin_registry = Object.create(dart.library);
+  var url_launcher_web = Object.create(dart.library);
+  var js$ = Object.create(dart.library);
+  var dart_ui = Object.create(dart.library);
+  var link = Object.create(dart.library);
+  var url_launcher_platform_interface = Object.create(dart.library);
+  var link$ = Object.create(dart.library);
+  var browser = Object.create(dart.library);
+  var dart_ui_real = Object.create(dart.library);
+  var plugin_platform_interface = Object.create(dart.library);
+  var method_channel_url_launcher = Object.create(dart.library);
+  var $map = dartx.map;
+  var $join = dartx.join;
+  var $isEmpty = dartx.isEmpty;
+  var $startsWith = dartx.startsWith;
+  var $substring = dartx.substring;
+  var $isNotEmpty = dartx.isNotEmpty;
+  var $location = dartx.location;
+  var $history = dartx.history;
+  var $addEventListener = dartx.addEventListener;
+  var $removeEventListener = dartx.removeEventListener;
+  var $hash = dartx.hash;
+  var $state = dartx.state;
+  var $pushState = dartx.pushState;
+  var $replaceState = dartx.replaceState;
+  var $_get = dartx._get;
+  var $getAttribute = dartx.getAttribute;
+  var $endsWith = dartx.endsWith;
+  var $remove = dartx.remove;
+  var $_set = dartx._set;
+  var $navigator = dartx.navigator;
+  var $open = dartx.open;
+  var $_equals = dartx._equals;
+  var $onClick = dartx.onClick;
+  var $style = dartx.style;
+  var $opacity = dartx.opacity;
+  var $display = dartx.display;
+  var $width = dartx.width;
+  var $height = dartx.height;
+  var $cursor = dartx.cursor;
+  var $setAttribute = dartx.setAttribute;
+  var $toString = dartx.toString;
+  var $removeAttribute = dartx.removeAttribute;
+  var $target = dartx.target;
+  var $shadowRoot = dartx.shadowRoot;
+  var $tagName = dartx.tagName;
+  var $vendor = dartx.vendor;
+  var $appVersion = dartx.appVersion;
+  var $contains = dartx.contains;
+  dart._checkModuleNullSafetyMode(true);
+  var T$ = {
+    StringToString: () => (T$.StringToString = dart.constFn(dart.fnType(core.String, [core.String])))(),
+    ListOfString: () => (T$.ListOfString = dart.constFn(core.List$(core.String)))(),
+    boolAndListOfStringTovoid: () => (T$.boolAndListOfStringTovoid = dart.constFn(dart.fnType(dart.void, [core.bool], [T$.ListOfString()])))(),
+    VoidToString: () => (T$.VoidToString = dart.constFn(dart.fnType(core.String, [])))(),
+    ObjectN: () => (T$.ObjectN = dart.constFn(dart.nullable(core.Object)))(),
+    VoidToObjectN: () => (T$.VoidToObjectN = dart.constFn(dart.fnType(T$.ObjectN(), [])))(),
+    VoidTovoid: () => (T$.VoidTovoid = dart.constFn(dart.fnType(dart.void, [])))(),
+    EventTodynamic: () => (T$.EventTodynamic = dart.constFn(dart.fnType(dart.dynamic, [html.Event])))(),
+    FnToFn: () => (T$.FnToFn = dart.constFn(dart.fnType(T$.VoidTovoid(), [T$.EventTodynamic()])))(),
+    ObjectAndStringAndStringTovoid: () => (T$.ObjectAndStringAndStringTovoid = dart.constFn(dart.fnType(dart.void, [core.Object, core.String, core.String])))(),
+    FutureOfvoid: () => (T$.FutureOfvoid = dart.constFn(async.Future$(dart.void)))(),
+    intToFutureOfvoid: () => (T$.intToFutureOfvoid = dart.constFn(dart.fnType(T$.FutureOfvoid(), [core.int])))(),
+    CompleterOfvoid: () => (T$.CompleterOfvoid = dart.constFn(async.Completer$(dart.void)))(),
+    VoidToFn: () => (T$.VoidToFn = dart.constFn(dart.fnType(T$.VoidTovoid(), [])))(),
+    FnTodynamic: () => (T$.FnTodynamic = dart.constFn(dart.fnType(dart.dynamic, [T$.VoidTovoid()])))(),
+    EventToNull: () => (T$.EventToNull = dart.constFn(dart.fnType(core.Null, [html.Event])))(),
+    dynamicTovoid: () => (T$.dynamicTovoid = dart.constFn(dart.fnType(dart.void, [dart.dynamic])))(),
+    dynamicToNull: () => (T$.dynamicToNull = dart.constFn(dart.fnType(core.Null, [dart.dynamic])))(),
+    ByteDataN: () => (T$.ByteDataN = dart.constFn(dart.nullable(typed_data.ByteData)))(),
+    FutureOfByteDataN: () => (T$.FutureOfByteDataN = dart.constFn(async.Future$(T$.ByteDataN())))(),
+    FutureNOfByteDataN: () => (T$.FutureNOfByteDataN = dart.constFn(dart.nullable(T$.FutureOfByteDataN())))(),
+    ByteDataNToFutureNOfByteDataN: () => (T$.ByteDataNToFutureNOfByteDataN = dart.constFn(dart.fnType(T$.FutureNOfByteDataN(), [T$.ByteDataN()])))(),
+    IdentityMapOfString$ByteDataNToFutureNOfByteDataN: () => (T$.IdentityMapOfString$ByteDataNToFutureNOfByteDataN = dart.constFn(_js_helper.IdentityMap$(core.String, T$.ByteDataNToFutureNOfByteDataN())))(),
+    CompleterOfByteDataN: () => (T$.CompleterOfByteDataN = dart.constFn(async.Completer$(T$.ByteDataN())))(),
+    ByteDataNTovoid: () => (T$.ByteDataNTovoid = dart.constFn(dart.fnType(dart.void, [T$.ByteDataN()])))(),
+    LinkInfoToWebLinkDelegate: () => (T$.LinkInfoToWebLinkDelegate = dart.constFn(dart.fnType(link$.WebLinkDelegate, [link.LinkInfo])))(),
+    FutureOfbool: () => (T$.FutureOfbool = dart.constFn(async.Future$(core.bool)))(),
+    VoidTobool: () => (T$.VoidTobool = dart.constFn(dart.fnType(core.bool, [])))(),
+    LinkedHashSetOfString: () => (T$.LinkedHashSetOfString = dart.constFn(collection.LinkedHashSet$(core.String)))(),
+    CompleterOfByteData: () => (T$.CompleterOfByteData = dart.constFn(async.Completer$(typed_data.ByteData)))(),
+    PlatformViewCreationParamsToLinkViewController: () => (T$.PlatformViewCreationParamsToLinkViewController = dart.constFn(dart.fnType(link$.LinkViewController, [platform_view.PlatformViewCreationParams])))(),
+    FactoryOfOneSequenceGestureRecognizer: () => (T$.FactoryOfOneSequenceGestureRecognizer = dart.constFn(basic_types.Factory$(recognizer.OneSequenceGestureRecognizer)))(),
+    _HashSetOfFactoryOfOneSequenceGestureRecognizer: () => (T$._HashSetOfFactoryOfOneSequenceGestureRecognizer = dart.constFn(collection._HashSet$(T$.FactoryOfOneSequenceGestureRecognizer())))(),
+    BuildContextAndPlatformViewControllerToPlatformViewSurface: () => (T$.BuildContextAndPlatformViewControllerToPlatformViewSurface = dart.constFn(dart.fnType(platform_view.PlatformViewSurface, [framework.BuildContext, platform_views.PlatformViewController])))(),
+    JSArrayOfWidget: () => (T$.JSArrayOfWidget = dart.constFn(_interceptors.JSArray$(framework.Widget)))(),
+    MouseEventTovoid: () => (T$.MouseEventTovoid = dart.constFn(dart.fnType(dart.void, [html.MouseEvent])))(),
+    voidToNull: () => (T$.voidToNull = dart.constFn(dart.fnType(core.Null, [dart.void])))(),
+    IdentityMapOfString$dynamic: () => (T$.IdentityMapOfString$dynamic = dart.constFn(_js_helper.IdentityMap$(core.String, dart.dynamic)))(),
+    IdentityMapOfint$LinkViewController: () => (T$.IdentityMapOfint$LinkViewController = dart.constFn(_js_helper.IdentityMap$(core.int, link$.LinkViewController)))(),
+    intN: () => (T$.intN = dart.constFn(dart.nullable(core.int)))(),
+    intToElement: () => (T$.intToElement = dart.constFn(dart.fnType(html.Element, [core.int])))(),
+    IdentityMapOfString$Object: () => (T$.IdentityMapOfString$Object = dart.constFn(_js_helper.IdentityMap$(core.String, core.Object)))(),
+    boolN: () => (T$.boolN = dart.constFn(dart.nullable(core.bool)))(),
+    boolNTobool: () => (T$.boolNTobool = dart.constFn(dart.fnType(core.bool, [T$.boolN()])))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C1() {
+      return C[1] = dart.const({
+        __proto__: recognizer.DragStartBehavior.prototype,
+        [_name]: "DragStartBehavior.start",
+        index: 1
+      });
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: edge_insets.EdgeInsets.prototype,
+        [EdgeInsets_bottom]: 0,
+        [EdgeInsets_right]: 0,
+        [EdgeInsets_top]: 0,
+        [EdgeInsets_left]: 0
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: edge_insets.EdgeInsets.prototype,
+        [EdgeInsets_bottom]: 10,
+        [EdgeInsets_right]: 0,
+        [EdgeInsets_top]: 0,
+        [EdgeInsets_left]: 0
+      });
+    },
+    get C7() {
+      return C[7] = dart.const({
+        __proto__: icon_data.IconData.prototype,
+        [IconData_matchTextDirection]: false,
+        [IconData_fontPackage]: null,
+        [IconData_fontFamily]: "MaterialIcons",
+        [IconData_codePoint]: 57815
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: icon.Icon.prototype,
+        [Widget_key]: null,
+        [Icon_textDirection]: null,
+        [Icon_semanticLabel]: null,
+        [Icon_color]: null,
+        [Icon_size]: null,
+        [Icon_icon]: C[7] || CT.C7
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: tabs.Tab.prototype,
+        [Widget_key]: null,
+        [Tab_height]: null,
+        [Tab_iconMargin]: C[5] || CT.C5,
+        [Tab_icon]: C[6] || CT.C6,
+        [Tab_child]: null,
+        [Tab_text]: null
+      });
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: icon_data.IconData.prototype,
+        [IconData_matchTextDirection]: false,
+        [IconData_fontPackage]: null,
+        [IconData_fontFamily]: "MaterialIcons",
+        [IconData_codePoint]: 57823
+      });
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: icon.Icon.prototype,
+        [Widget_key]: null,
+        [Icon_textDirection]: null,
+        [Icon_semanticLabel]: null,
+        [Icon_color]: null,
+        [Icon_size]: null,
+        [Icon_icon]: C[10] || CT.C10
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: tabs.Tab.prototype,
+        [Widget_key]: null,
+        [Tab_height]: null,
+        [Tab_iconMargin]: C[5] || CT.C5,
+        [Tab_icon]: C[9] || CT.C9,
+        [Tab_child]: null,
+        [Tab_text]: null
+      });
+    },
+    get C13() {
+      return C[13] = dart.const({
+        __proto__: icon_data.IconData.prototype,
+        [IconData_matchTextDirection]: false,
+        [IconData_fontPackage]: null,
+        [IconData_fontFamily]: "MaterialIcons",
+        [IconData_codePoint]: 57810
+      });
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: icon.Icon.prototype,
+        [Widget_key]: null,
+        [Icon_textDirection]: null,
+        [Icon_semanticLabel]: null,
+        [Icon_color]: null,
+        [Icon_size]: null,
+        [Icon_icon]: C[13] || CT.C13
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: tabs.Tab.prototype,
+        [Widget_key]: null,
+        [Tab_height]: null,
+        [Tab_iconMargin]: C[5] || CT.C5,
+        [Tab_icon]: C[12] || CT.C12,
+        [Tab_child]: null,
+        [Tab_text]: null
+      });
+    },
+    get C3() {
+      return C[3] = dart.constList([C[4] || CT.C4, C[8] || CT.C8, C[11] || CT.C11], framework.Widget);
+    },
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: tabs.TabBar.prototype,
+        [Widget_key]: null,
+        [TabBar_physics]: null,
+        [TabBar_onTap]: null,
+        [TabBar_enableFeedback]: null,
+        [TabBar_mouseCursor]: null,
+        [TabBar_dragStartBehavior]: C[1] || CT.C1,
+        [TabBar_overlayColor]: null,
+        [TabBar_unselectedLabelStyle]: null,
+        [TabBar_labelPadding]: null,
+        [TabBar_labelStyle]: null,
+        [TabBar_unselectedLabelColor]: null,
+        [TabBar_labelColor]: null,
+        [TabBar_indicatorSize]: null,
+        [TabBar_automaticIndicatorColorAdjustment]: true,
+        [TabBar_indicator]: null,
+        [TabBar_indicatorPadding]: C[2] || CT.C2,
+        [TabBar_indicatorWeight]: 2,
+        [TabBar_indicatorColor]: null,
+        [TabBar_padding]: null,
+        [TabBar_isScrollable]: false,
+        [TabBar_controller]: null,
+        [TabBar_tabs]: C[3] || CT.C3
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: text.Text.prototype,
+        [Widget_key]: null,
+        [Text_textHeightBehavior]: null,
+        [Text_textWidthBasis]: null,
+        [Text_semanticsLabel]: null,
+        [Text_maxLines]: null,
+        [Text_textScaleFactor]: null,
+        [Text_overflow]: null,
+        [Text_softWrap]: null,
+        [Text_locale]: null,
+        [Text_textDirection]: null,
+        [Text_textAlign]: null,
+        [Text_strutStyle]: null,
+        [Text_style]: null,
+        [Text_textSpan]: null,
+        [Text_data]: "Tabs Demo"
+      });
+    },
+    get C16() {
+      return C[16] = dart.constList([C[6] || CT.C6, C[9] || CT.C9, C[12] || CT.C12], framework.Widget);
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: tabs.TabBarView.prototype,
+        [Widget_key]: null,
+        [TabBarView_dragStartBehavior]: C[1] || CT.C1,
+        [TabBarView_physics]: null,
+        [TabBarView_children]: C[16] || CT.C16,
+        [TabBarView_controller]: null
+      });
+    },
+    get C17() {
+      return C[17] = dart.const({
+        __proto__: main.TabBarDemo.prototype,
+        [Widget_key]: null
+      });
+    },
+    get C18() {
+      return C[18] = dart.constList([], core.String);
+    },
+    get C19() {
+      return C[19] = dart.fn(main._result, T$.boolAndListOfStringTovoid());
+    },
+    get C20() {
+      return C[20] = dart.const({
+        __proto__: url_strategy.BrowserPlatformLocation.prototype
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: message_codecs.StandardMessageCodec.prototype
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: message_codecs.StandardMethodCodec.prototype,
+        [StandardMethodCodec_messageCodec]: C[22] || CT.C22
+      });
+    },
+    get C23() {
+      return C[23] = dart.constMap(core.String, core.String, []);
+    },
+    get C24() {
+      return C[24] = dart.constSet(core.String, ["mailto", "tel", "sms"]);
+    },
+    get C25() {
+      return C[25] = dart.const({
+        __proto__: js$._Anonymous.prototype
+      });
+    },
+    get C26() {
+      return C[26] = dart.const({
+        __proto__: link.LinkTarget.prototype,
+        [debugLabel$]: "defaultTarget"
+      });
+    },
+    get C27() {
+      return C[27] = dart.const({
+        __proto__: link.LinkTarget.prototype,
+        [debugLabel$]: "self"
+      });
+    },
+    get C28() {
+      return C[28] = dart.const({
+        __proto__: link.LinkTarget.prototype,
+        [debugLabel$]: "blank"
+      });
+    },
+    get C29() {
+      return C[29] = dart.const({
+        __proto__: message_codecs.JSONMethodCodec.prototype
+      });
+    },
+    get C30() {
+      return C[30] = dart.fn(link$.LinkViewController._onGlobalClick, T$.MouseEventTovoid());
+    },
+    get C31() {
+      return C[31] = dart.fn(link$.LinkViewController._viewFactory, T$.intToElement());
+    },
+    get C32() {
+      return C[32] = dart.const({
+        __proto__: platform_channel.MethodChannel.prototype,
+        [MethodChannel__binaryMessenger]: null,
+        [MethodChannel_codec]: C[21] || CT.C21,
+        [MethodChannel_name]: "plugins.flutter.io/url_launcher"
+      });
+    }
+  }, false);
+  var C = Array(33).fill(void 0);
+  var I = [
+    "package:dartpad_sample/main.dart",
+    "package:flutter_web_plugins/src/navigation/url_strategy.dart",
+    "file:///app/flutter-sdks/stable/packages/flutter_web_plugins/lib/src/navigation/url_strategy.dart",
+    "file:///app/flutter-sdks/stable/packages/flutter_web_plugins/lib/src/plugin_event_channel.dart",
+    "package:flutter_web_plugins/src/plugin_event_channel.dart",
+    "package:flutter_web_plugins/src/plugin_registry.dart",
+    "file:///home/dart/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.2/lib/plugin_platform_interface.dart",
+    "package:plugin_platform_interface/plugin_platform_interface.dart",
+    "package:url_launcher_platform_interface/url_launcher_platform_interface.dart",
+    "package:url_launcher_web/url_launcher_web.dart",
+    "package:js/js.dart",
+    "package:url_launcher_platform_interface/link.dart",
+    "package:url_launcher_web/src/link.dart",
+    "file:///home/dart/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.4/lib/src/link.dart",
+    "package:url_launcher_platform_interface/method_channel_url_launcher.dart"
+  ];
+  bootstrap.main = function main$() {
+    return async.async(dart.void, function* main$() {
+      generated_plugin_registrant.registerPlugins(plugin_registry.webPluginRegistrar);
+      yield ui.webOnlyInitializePlatform();
+      main.main();
+    });
+  };
+  generated_plugin_registrant.registerPlugins = function registerPlugins(registrar) {
+    url_launcher_web.UrlLauncherPlugin.registerWith(registrar);
+    registrar.registerMessageHandler();
+  };
+  var Widget_key = dart.privateName(framework, "Widget.key");
+  var TabBar_physics = dart.privateName(tabs, "TabBar.physics");
+  var TabBar_onTap = dart.privateName(tabs, "TabBar.onTap");
+  var TabBar_enableFeedback = dart.privateName(tabs, "TabBar.enableFeedback");
+  var TabBar_mouseCursor = dart.privateName(tabs, "TabBar.mouseCursor");
+  var _name = dart.privateName(recognizer, "_name");
+  var TabBar_dragStartBehavior = dart.privateName(tabs, "TabBar.dragStartBehavior");
+  var TabBar_overlayColor = dart.privateName(tabs, "TabBar.overlayColor");
+  var TabBar_unselectedLabelStyle = dart.privateName(tabs, "TabBar.unselectedLabelStyle");
+  var TabBar_labelPadding = dart.privateName(tabs, "TabBar.labelPadding");
+  var TabBar_labelStyle = dart.privateName(tabs, "TabBar.labelStyle");
+  var TabBar_unselectedLabelColor = dart.privateName(tabs, "TabBar.unselectedLabelColor");
+  var TabBar_labelColor = dart.privateName(tabs, "TabBar.labelColor");
+  var TabBar_indicatorSize = dart.privateName(tabs, "TabBar.indicatorSize");
+  var TabBar_automaticIndicatorColorAdjustment = dart.privateName(tabs, "TabBar.automaticIndicatorColorAdjustment");
+  var TabBar_indicator = dart.privateName(tabs, "TabBar.indicator");
+  var EdgeInsets_bottom = dart.privateName(edge_insets, "EdgeInsets.bottom");
+  var EdgeInsets_right = dart.privateName(edge_insets, "EdgeInsets.right");
+  var EdgeInsets_top = dart.privateName(edge_insets, "EdgeInsets.top");
+  var EdgeInsets_left = dart.privateName(edge_insets, "EdgeInsets.left");
+  var TabBar_indicatorPadding = dart.privateName(tabs, "TabBar.indicatorPadding");
+  var TabBar_indicatorWeight = dart.privateName(tabs, "TabBar.indicatorWeight");
+  var TabBar_indicatorColor = dart.privateName(tabs, "TabBar.indicatorColor");
+  var TabBar_padding = dart.privateName(tabs, "TabBar.padding");
+  var TabBar_isScrollable = dart.privateName(tabs, "TabBar.isScrollable");
+  var TabBar_controller = dart.privateName(tabs, "TabBar.controller");
+  var Tab_height = dart.privateName(tabs, "Tab.height");
+  var Tab_iconMargin = dart.privateName(tabs, "Tab.iconMargin");
+  var Icon_textDirection = dart.privateName(icon, "Icon.textDirection");
+  var Icon_semanticLabel = dart.privateName(icon, "Icon.semanticLabel");
+  var Icon_color = dart.privateName(icon, "Icon.color");
+  var Icon_size = dart.privateName(icon, "Icon.size");
+  var IconData_matchTextDirection = dart.privateName(icon_data, "IconData.matchTextDirection");
+  var IconData_fontPackage = dart.privateName(icon_data, "IconData.fontPackage");
+  var IconData_fontFamily = dart.privateName(icon_data, "IconData.fontFamily");
+  var IconData_codePoint = dart.privateName(icon_data, "IconData.codePoint");
+  var Icon_icon = dart.privateName(icon, "Icon.icon");
+  var Tab_icon = dart.privateName(tabs, "Tab.icon");
+  var Tab_child = dart.privateName(tabs, "Tab.child");
+  var Tab_text = dart.privateName(tabs, "Tab.text");
+  var TabBar_tabs = dart.privateName(tabs, "TabBar.tabs");
+  var Text_textHeightBehavior = dart.privateName(text, "Text.textHeightBehavior");
+  var Text_textWidthBasis = dart.privateName(text, "Text.textWidthBasis");
+  var Text_semanticsLabel = dart.privateName(text, "Text.semanticsLabel");
+  var Text_maxLines = dart.privateName(text, "Text.maxLines");
+  var Text_textScaleFactor = dart.privateName(text, "Text.textScaleFactor");
+  var Text_overflow = dart.privateName(text, "Text.overflow");
+  var Text_softWrap = dart.privateName(text, "Text.softWrap");
+  var Text_locale = dart.privateName(text, "Text.locale");
+  var Text_textDirection = dart.privateName(text, "Text.textDirection");
+  var Text_textAlign = dart.privateName(text, "Text.textAlign");
+  var Text_strutStyle = dart.privateName(text, "Text.strutStyle");
+  var Text_style = dart.privateName(text, "Text.style");
+  var Text_textSpan = dart.privateName(text, "Text.textSpan");
+  var Text_data = dart.privateName(text, "Text.data");
+  var TabBarView_dragStartBehavior = dart.privateName(tabs, "TabBarView.dragStartBehavior");
+  var TabBarView_physics = dart.privateName(tabs, "TabBarView.physics");
+  var TabBarView_children = dart.privateName(tabs, "TabBarView.children");
+  var TabBarView_controller = dart.privateName(tabs, "TabBarView.controller");
+  main.TabBarDemo = class TabBarDemo extends framework.StatelessWidget {
+    build(context) {
+      return new app.MaterialApp.new({home: new tab_controller.DefaultTabController.new({length: 3, child: new scaffold.Scaffold.new({appBar: new app_bar.AppBar.new({bottom: C[0] || CT.C0, title: C[14] || CT.C14}), body: C[15] || CT.C15})})});
+    }
+  };
+  (main.TabBarDemo.new = function(opts) {
+    let key = opts && 'key' in opts ? opts.key : null;
+    main.TabBarDemo.__proto__.new.call(this, {key: key});
+    ;
+  }).prototype = main.TabBarDemo.prototype;
+  dart.addTypeTests(main.TabBarDemo);
+  dart.addTypeCaches(main.TabBarDemo);
+  dart.setMethodSignature(main.TabBarDemo, () => ({
+    __proto__: dart.getMethods(main.TabBarDemo.__proto__),
+    build: dart.fnType(framework.Widget, [framework.BuildContext])
+  }));
+  dart.setLibraryUri(main.TabBarDemo, I[0]);
+  main.main = function main$0() {
+    binding.runApp(C[17] || CT.C17);
+  };
+  main._result = function _result(success, messages = C[18] || CT.C18) {
+    let joinedMessages = messages[$map](core.String, dart.fn(m => "\"" + m + "\"", T$.StringToString()))[$join](",");
+    core.print("__TESTRESULT__ {\"success\": " + dart.str(success) + ", \"messages\": [" + joinedMessages + "]}");
+  };
+  main.TODO = function TODO(message = "") {
+    return dart.throw(new core.UnimplementedError.new(message));
+  };
+  dart.defineLazy(main, {
+    /*main.resultFunction*/get resultFunction() {
+      return C[19] || CT.C19;
+    },
+    set resultFunction(_) {}
+  }, false);
+  js_url_strategy.convertToJsUrlStrategy = function convertToJsUrlStrategy(strategy) {
+    return {getPath: js.allowInterop(T$.VoidToString(), dart.bind(strategy, 'getPath')), getState: js.allowInterop(T$.VoidToObjectN(), dart.bind(strategy, 'getState')), addPopStateListener: js.allowInterop(T$.FnToFn(), dart.bind(strategy, 'addPopStateListener')), prepareExternalUrl: js.allowInterop(T$.StringToString(), dart.bind(strategy, 'prepareExternalUrl')), pushState: js.allowInterop(T$.ObjectAndStringAndStringTovoid(), dart.bind(strategy, 'pushState')), replaceState: js.allowInterop(T$.ObjectAndStringAndStringTovoid(), dart.bind(strategy, 'replaceState')), go: js.allowInterop(T$.intToFutureOfvoid(), dart.bind(strategy, 'go'))};
+  };
+  url_strategy.UrlStrategy = class UrlStrategy extends core.Object {};
+  (url_strategy.UrlStrategy.new = function() {
+    ;
+  }).prototype = url_strategy.UrlStrategy.prototype;
+  dart.addTypeTests(url_strategy.UrlStrategy);
+  dart.addTypeCaches(url_strategy.UrlStrategy);
+  dart.setLibraryUri(url_strategy.UrlStrategy, I[1]);
+  var _platformLocation$ = dart.privateName(url_strategy, "HashUrlStrategy._platformLocation");
+  var _platformLocation = dart.privateName(url_strategy, "_platformLocation");
+  var _waitForPopState = dart.privateName(url_strategy, "_waitForPopState");
+  url_strategy.HashUrlStrategy = class HashUrlStrategy extends url_strategy.UrlStrategy {
+    get [_platformLocation]() {
+      return this[_platformLocation$];
+    }
+    set [_platformLocation](value) {
+      super[_platformLocation] = value;
+    }
+    addPopStateListener(fn) {
+      this[_platformLocation].addPopStateListener(fn);
+      return dart.fn(() => this[_platformLocation].removePopStateListener(fn), T$.VoidTovoid());
+    }
+    getPath() {
+      let path = this[_platformLocation].hash;
+      if (!(path[$isEmpty] || path[$startsWith]("#"))) dart.assertFailed(null, I[2], 107, 12, "path.isEmpty || path.startsWith('#')");
+      if (path[$isEmpty] || path === "#") {
+        return "/";
+      }
+      return path[$substring](1);
+    }
+    getState() {
+      return this[_platformLocation].state;
+    }
+    prepareExternalUrl(internalUrl) {
+      return internalUrl[$isEmpty] ? this[_platformLocation].pathname + this[_platformLocation].search : "#" + internalUrl;
+    }
+    pushState(state, title, url) {
+      this[_platformLocation].pushState(state, title, this.prepareExternalUrl(url));
+    }
+    replaceState(state, title, url) {
+      this[_platformLocation].replaceState(state, title, this.prepareExternalUrl(url));
+    }
+    go(count) {
+      this[_platformLocation].go(count);
+      return this[_waitForPopState]();
+    }
+    [_waitForPopState]() {
+      let completer = T$.CompleterOfvoid().new();
+      let unsubscribe = null;
+      function unsubscribe$35get() {
+        let t1;
+        t1 = unsubscribe;
+        return t1 == null ? dart.throw(new _internal.LateError.localNI("unsubscribe")) : t1;
+      }
+      dart.fn(unsubscribe$35get, T$.VoidToFn());
+      function unsubscribe$35set(t2) {
+        return unsubscribe = t2;
+      }
+      dart.fn(unsubscribe$35set, T$.FnTodynamic());
+      unsubscribe$35set(this.addPopStateListener(dart.fn(_ => {
+        unsubscribe$35get()();
+        completer.complete();
+      }, T$.EventToNull())));
+      return completer.future;
+    }
+  };
+  (url_strategy.HashUrlStrategy.new = function(_platformLocation = C[20] || CT.C20) {
+    this[_platformLocation$] = _platformLocation;
+    url_strategy.HashUrlStrategy.__proto__.new.call(this);
+    ;
+  }).prototype = url_strategy.HashUrlStrategy.prototype;
+  dart.addTypeTests(url_strategy.HashUrlStrategy);
+  dart.addTypeCaches(url_strategy.HashUrlStrategy);
+  dart.setMethodSignature(url_strategy.HashUrlStrategy, () => ({
+    __proto__: dart.getMethods(url_strategy.HashUrlStrategy.__proto__),
+    addPopStateListener: dart.fnType(dart.fnType(dart.void, []), [dart.fnType(dart.dynamic, [html.Event])]),
+    getPath: dart.fnType(core.String, []),
+    getState: dart.fnType(dart.nullable(core.Object), []),
+    prepareExternalUrl: dart.fnType(core.String, [core.String]),
+    pushState: dart.fnType(dart.void, [dart.nullable(core.Object), core.String, core.String]),
+    replaceState: dart.fnType(dart.void, [dart.nullable(core.Object), core.String, core.String]),
+    go: dart.fnType(async.Future$(dart.void), [core.int]),
+    [_waitForPopState]: dart.fnType(async.Future$(dart.void), [])
+  }));
+  dart.setLibraryUri(url_strategy.HashUrlStrategy, I[1]);
+  dart.setFieldSignature(url_strategy.HashUrlStrategy, () => ({
+    __proto__: dart.getFields(url_strategy.HashUrlStrategy.__proto__),
+    [_platformLocation]: dart.finalFieldType(url_strategy.PlatformLocation)
+  }));
+  var _basePath = dart.privateName(url_strategy, "_basePath");
+  url_strategy.PathUrlStrategy = class PathUrlStrategy extends url_strategy.HashUrlStrategy {
+    getPath() {
+      let path = this[_platformLocation].pathname + this[_platformLocation].search;
+      if (this[_basePath][$isNotEmpty] && path[$startsWith](this[_basePath])) {
+        return utils.ensureLeadingSlash(path[$substring](this[_basePath].length));
+      }
+      return utils.ensureLeadingSlash(path);
+    }
+    prepareExternalUrl(internalUrl) {
+      if (internalUrl[$isNotEmpty] && !internalUrl[$startsWith]("/")) {
+        internalUrl = "/" + internalUrl;
+      }
+      return this[_basePath] + internalUrl;
+    }
+  };
+  (url_strategy.PathUrlStrategy.new = function(_platformLocation = C[20] || CT.C20) {
+    this[_basePath] = utils.stripTrailingSlash(utils.extractPathname(utils.checkBaseHref(_platformLocation.getBaseHref())));
+    url_strategy.PathUrlStrategy.__proto__.new.call(this, _platformLocation);
+    ;
+  }).prototype = url_strategy.PathUrlStrategy.prototype;
+  dart.addTypeTests(url_strategy.PathUrlStrategy);
+  dart.addTypeCaches(url_strategy.PathUrlStrategy);
+  dart.setLibraryUri(url_strategy.PathUrlStrategy, I[1]);
+  dart.setFieldSignature(url_strategy.PathUrlStrategy, () => ({
+    __proto__: dart.getFields(url_strategy.PathUrlStrategy.__proto__),
+    [_basePath]: dart.finalFieldType(core.String)
+  }));
+  url_strategy.PlatformLocation = class PlatformLocation extends core.Object {};
+  (url_strategy.PlatformLocation.new = function() {
+    ;
+  }).prototype = url_strategy.PlatformLocation.prototype;
+  dart.addTypeTests(url_strategy.PlatformLocation);
+  dart.addTypeCaches(url_strategy.PlatformLocation);
+  dart.setLibraryUri(url_strategy.PlatformLocation, I[1]);
+  var _location = dart.privateName(url_strategy, "_location");
+  var _history = dart.privateName(url_strategy, "_history");
+  url_strategy.BrowserPlatformLocation = class BrowserPlatformLocation extends url_strategy.PlatformLocation {
+    get [_location]() {
+      return html.window[$location];
+    }
+    get [_history]() {
+      return html.window[$history];
+    }
+    addPopStateListener(fn) {
+      html.window[$addEventListener]("popstate", fn);
+    }
+    removePopStateListener(fn) {
+      html.window[$removeEventListener]("popstate", fn);
+    }
+    get pathname() {
+      let t4;
+      t4 = this[_location].pathname;
+      return t4 == null ? "" : t4;
+    }
+    get search() {
+      let t4;
+      t4 = this[_location].search;
+      return t4 == null ? "" : t4;
+    }
+    get hash() {
+      return this[_location][$hash];
+    }
+    get state() {
+      return this[_history][$state];
+    }
+    pushState(state, title, url) {
+      this[_history][$pushState](state, title, url);
+    }
+    replaceState(state, title, url) {
+      this[_history][$replaceState](state, title, url);
+    }
+    go(count) {
+      this[_history].go(count);
+    }
+    getBaseHref() {
+      return utils.getBaseElementHrefFromDom();
+    }
+  };
+  (url_strategy.BrowserPlatformLocation.new = function() {
+    url_strategy.BrowserPlatformLocation.__proto__.new.call(this);
+    ;
+  }).prototype = url_strategy.BrowserPlatformLocation.prototype;
+  dart.addTypeTests(url_strategy.BrowserPlatformLocation);
+  dart.addTypeCaches(url_strategy.BrowserPlatformLocation);
+  dart.setMethodSignature(url_strategy.BrowserPlatformLocation, () => ({
+    __proto__: dart.getMethods(url_strategy.BrowserPlatformLocation.__proto__),
+    addPopStateListener: dart.fnType(dart.void, [dart.fnType(dart.dynamic, [html.Event])]),
+    removePopStateListener: dart.fnType(dart.void, [dart.fnType(dart.dynamic, [html.Event])]),
+    pushState: dart.fnType(dart.void, [dart.nullable(core.Object), core.String, core.String]),
+    replaceState: dart.fnType(dart.void, [dart.nullable(core.Object), core.String, core.String]),
+    go: dart.fnType(dart.void, [core.int]),
+    getBaseHref: dart.fnType(dart.nullable(core.String), [])
+  }));
+  dart.setGetterSignature(url_strategy.BrowserPlatformLocation, () => ({
+    __proto__: dart.getGetters(url_strategy.BrowserPlatformLocation.__proto__),
+    [_location]: html.Location,
+    [_history]: html.History,
+    pathname: core.String,
+    search: core.String,
+    hash: core.String,
+    state: dart.nullable(core.Object)
+  }));
+  dart.setLibraryUri(url_strategy.BrowserPlatformLocation, I[1]);
+  dart.defineLazy(url_strategy.BrowserPlatformLocation, {
+    /*url_strategy.BrowserPlatformLocation._defaultPathname*/get _defaultPathname() {
+      return "";
+    },
+    /*url_strategy.BrowserPlatformLocation._defaultSearch*/get _defaultSearch() {
+      return "";
+    }
+  }, false);
+  url_strategy.setUrlStrategy = function setUrlStrategy(strategy) {
+    let jsUrlStrategy = null;
+    if (strategy != null) {
+      jsUrlStrategy = js_url_strategy.convertToJsUrlStrategy(strategy);
+    }
+    dart.global._flutter_web_set_location_strategy(jsUrlStrategy);
+  };
+  utils.extractPathname = function extractPathname(url) {
+    let t4;
+    utils._urlParsingNode.href = url;
+    let pathname = (t4 = utils._urlParsingNode.pathname, t4 == null ? "" : t4);
+    return pathname[$isEmpty] || pathname[$_get](0) === "/" ? pathname : "/" + pathname;
+  };
+  utils.getBaseElementHrefFromDom = function getBaseElementHrefFromDom() {
+    let t4;
+    t4 = utils._baseElement;
+    return t4 == null ? null : t4[$getAttribute]("href");
+  };
+  utils.checkBaseHref = function checkBaseHref(baseHref) {
+    if (baseHref == null) {
+      dart.throw(core.Exception.new("Please add a <base> element to your index.html"));
+    }
+    if (!baseHref[$endsWith]("/")) {
+      dart.throw(core.Exception.new("The base href has to end with a \"/\" to work correctly"));
+    }
+    return baseHref;
+  };
+  utils.ensureLeadingSlash = function ensureLeadingSlash(path) {
+    if (!path[$startsWith]("/")) {
+      return "/" + path;
+    }
+    return path;
+  };
+  utils.stripTrailingSlash = function stripTrailingSlash(path) {
+    if (path[$endsWith]("/")) {
+      return path[$substring](0, path.length - 1);
+    }
+    return path;
+  };
+  dart.defineLazy(utils, {
+    /*utils._urlParsingNode*/get _urlParsingNode() {
+      return html.AnchorElement.new();
+    },
+    /*utils._baseElement*/get _baseElement() {
+      return html.document.querySelector("base");
+    }
+  }, false);
+  var name$ = dart.privateName(plugin_event_channel, "PluginEventChannel.name");
+  var codec$ = dart.privateName(plugin_event_channel, "PluginEventChannel.codec");
+  var binaryMessenger$ = dart.privateName(plugin_event_channel, "PluginEventChannel.binaryMessenger");
+  var StandardMethodCodec_messageCodec = dart.privateName(message_codecs, "StandardMethodCodec.messageCodec");
+  const _is_PluginEventChannel_default = Symbol('_is_PluginEventChannel_default');
+  plugin_event_channel.PluginEventChannel$ = dart.generic(T => {
+    var __t$StreamControllerOfT = () => (__t$StreamControllerOfT = dart.constFn(async.StreamController$(T)))();
+    var __t$StreamControllerNOfT = () => (__t$StreamControllerNOfT = dart.constFn(dart.nullable(__t$StreamControllerOfT())))();
+    var __t$_EventChannelHandlerOfT = () => (__t$_EventChannelHandlerOfT = dart.constFn(plugin_event_channel._EventChannelHandler$(T)))();
+    class PluginEventChannel extends core.Object {
+      get name() {
+        return this[name$];
+      }
+      set name(value) {
+        super.name = value;
+      }
+      get codec() {
+        return this[codec$];
+      }
+      set codec(value) {
+        super.codec = value;
+      }
+      get binaryMessenger() {
+        return this[binaryMessenger$];
+      }
+      set binaryMessenger(value) {
+        super.binaryMessenger = value;
+      }
+      set controller(controller) {
+        __t$StreamControllerOfT().as(controller);
+        this.setController(controller);
+      }
+      setController(controller) {
+        let t4;
+        __t$StreamControllerNOfT().as(controller);
+        let messenger = (t4 = this.binaryMessenger, t4 == null ? plugin_registry.pluginBinaryMessenger : t4);
+        if (controller == null) {
+          messenger.setMessageHandler(this.name, null);
+        } else {
+          let handler = new (__t$_EventChannelHandlerOfT()).new(this.name, this.codec, controller, messenger);
+          messenger.setMessageHandler(this.name, dart.bind(handler, 'handle'));
+        }
+      }
+    }
+    (PluginEventChannel.new = function(name, codec = C[21] || CT.C21, binaryMessenger = null) {
+      this[name$] = name;
+      this[codec$] = codec;
+      this[binaryMessenger$] = binaryMessenger;
+      if (!(name !== null)) dart.assertFailed(null, I[3], 46, 15, "name != null");
+      if (!(codec !== null)) dart.assertFailed(null, I[3], 47, 15, "codec != null");
+      ;
+    }).prototype = PluginEventChannel.prototype;
+    dart.addTypeTests(PluginEventChannel);
+    PluginEventChannel.prototype[_is_PluginEventChannel_default] = true;
+    dart.addTypeCaches(PluginEventChannel);
+    dart.setMethodSignature(PluginEventChannel, () => ({
+      __proto__: dart.getMethods(PluginEventChannel.__proto__),
+      setController: dart.fnType(dart.void, [dart.nullable(core.Object)])
+    }));
+    dart.setSetterSignature(PluginEventChannel, () => ({
+      __proto__: dart.getSetters(PluginEventChannel.__proto__),
+      controller: dart.nullable(core.Object)
+    }));
+    dart.setLibraryUri(PluginEventChannel, I[4]);
+    dart.setFieldSignature(PluginEventChannel, () => ({
+      __proto__: dart.getFields(PluginEventChannel.__proto__),
+      name: dart.finalFieldType(core.String),
+      codec: dart.finalFieldType(message_codec.MethodCodec),
+      binaryMessenger: dart.finalFieldType(dart.nullable(binary_messenger.BinaryMessenger))
+    }));
+    return PluginEventChannel;
+  });
+  plugin_event_channel.PluginEventChannel = plugin_event_channel.PluginEventChannel$();
+  dart.addTypeTests(plugin_event_channel.PluginEventChannel, _is_PluginEventChannel_default);
+  var subscription = dart.privateName(plugin_event_channel, "_EventChannelHandler.subscription");
+  var _listen = dart.privateName(plugin_event_channel, "_listen");
+  var _cancel = dart.privateName(plugin_event_channel, "_cancel");
+  const _is__EventChannelHandler_default = Symbol('_is__EventChannelHandler_default');
+  plugin_event_channel._EventChannelHandler$ = dart.generic(T => {
+    var __t$StreamSubscriptionOfT = () => (__t$StreamSubscriptionOfT = dart.constFn(async.StreamSubscription$(T)))();
+    var __t$StreamSubscriptionNOfT = () => (__t$StreamSubscriptionNOfT = dart.constFn(dart.nullable(__t$StreamSubscriptionOfT())))();
+    class _EventChannelHandler extends core.Object {
+      get subscription() {
+        return this[subscription];
+      }
+      set subscription(value) {
+        this[subscription] = __t$StreamSubscriptionNOfT().as(value);
+      }
+      handle(message) {
+        let call = this.codec.decodeMethodCall(message);
+        switch (call.method) {
+          case "listen":
+          {
+            if (!(call.arguments == null)) dart.assertFailed(null, I[3], 124, 16, "call.arguments == null");
+            return this[_listen]();
+          }
+          case "cancel":
+          {
+            if (!(call.arguments == null)) dart.assertFailed(null, I[3], 127, 16, "call.arguments == null");
+            return this[_cancel]();
+          }
+        }
+        return null;
+      }
+      [_listen]() {
+        return async.async(typed_data.ByteData, (function* _listen() {
+          let t4;
+          yield (t4 = this.subscription, t4 == null ? null : t4.cancel());
+          this.subscription = this.controller.stream.listen(dart.fn(event => {
+            this.messenger.send(this.name, this.codec.encodeSuccessEnvelope(event));
+          }, T$.dynamicTovoid()), {onError: dart.fn(error => {
+              this.messenger.send(this.name, this.codec.encodeErrorEnvelope({code: "error", message: dart.str(error)}));
+            }, T$.dynamicToNull())});
+          return this.codec.encodeSuccessEnvelope(null);
+        }).bind(this));
+      }
+      [_cancel]() {
+        return async.async(typed_data.ByteData, (function* _cancel() {
+          if (this.subscription == null) {
+            return this.codec.encodeErrorEnvelope({code: "error", message: "No active subscription to cancel."});
+          }
+          yield dart.nullCheck(this.subscription).cancel();
+          this.subscription = null;
+          return this.codec.encodeSuccessEnvelope(null);
+        }).bind(this));
+      }
+    }
+    (_EventChannelHandler.new = function(name, codec, controller, messenger) {
+      this[subscription] = null;
+      this.name = name;
+      this.codec = codec;
+      this.controller = controller;
+      this.messenger = messenger;
+      if (!(messenger !== null)) dart.assertFailed(null, I[3], 111, 14, "messenger != null");
+      ;
+    }).prototype = _EventChannelHandler.prototype;
+    dart.addTypeTests(_EventChannelHandler);
+    _EventChannelHandler.prototype[_is__EventChannelHandler_default] = true;
+    dart.addTypeCaches(_EventChannelHandler);
+    dart.setMethodSignature(_EventChannelHandler, () => ({
+      __proto__: dart.getMethods(_EventChannelHandler.__proto__),
+      handle: dart.fnType(dart.nullable(async.Future$(typed_data.ByteData)), [dart.nullable(typed_data.ByteData)]),
+      [_listen]: dart.fnType(async.Future$(typed_data.ByteData), []),
+      [_cancel]: dart.fnType(async.Future$(typed_data.ByteData), [])
+    }));
+    dart.setLibraryUri(_EventChannelHandler, I[4]);
+    dart.setFieldSignature(_EventChannelHandler, () => ({
+      __proto__: dart.getFields(_EventChannelHandler.__proto__),
+      name: dart.finalFieldType(core.String),
+      codec: dart.finalFieldType(message_codec.MethodCodec),
+      controller: dart.finalFieldType(async.StreamController$(T)),
+      messenger: dart.finalFieldType(binary_messenger.BinaryMessenger),
+      subscription: dart.fieldType(dart.nullable(async.StreamSubscription$(T)))
+    }));
+    return _EventChannelHandler;
+  });
+  plugin_event_channel._EventChannelHandler = plugin_event_channel._EventChannelHandler$();
+  dart.addTypeTests(plugin_event_channel._EventChannelHandler, _is__EventChannelHandler_default);
+  var _handlers = dart.privateName(plugin_registry, "_handlers");
+  plugin_registry.Registrar = class Registrar extends binary_messenger.BinaryMessenger {
+    registerMessageHandler() {
+      ui.webOnlySetPluginHandler(dart.bind(this, 'handleFrameworkMessage'));
+    }
+    handlePlatformMessage(channel, data, callback) {
+      return this.handleFrameworkMessage(channel, data, callback);
+    }
+    handleFrameworkMessage(channel, data, callback) {
+      return async.async(dart.void, (function* handleFrameworkMessage() {
+        let response = null;
+        try {
+          let handler = this[_handlers][$_get](channel);
+          if (handler != null) {
+            response = (yield handler(data));
+          }
+        } catch (e) {
+          let exception = dart.getThrown(e);
+          let stack = dart.stackTrace(e);
+          if (core.Object.is(exception)) {
+            assertions.FlutterError.reportError(new assertions.FlutterErrorDetails.new({exception: exception, stack: stack, library: "flutter web plugins", context: new assertions.ErrorDescription.new("during a framework-to-plugin message")}));
+          } else
+            throw e;
+        } finally {
+          if (callback != null) {
+            callback(response);
+          }
+        }
+      }).bind(this));
+    }
+    get messenger() {
+      return this;
+    }
+    send(channel, message) {
+      let completer = T$.CompleterOfByteDataN().new();
+      ui.channelBuffers.push(channel, message, dart.fn(reply => {
+        try {
+          completer.complete(reply);
+        } catch (e) {
+          let exception = dart.getThrown(e);
+          let stack = dart.stackTrace(e);
+          if (core.Object.is(exception)) {
+            assertions.FlutterError.reportError(new assertions.FlutterErrorDetails.new({exception: exception, stack: stack, library: "flutter web plugins", context: new assertions.ErrorDescription.new("during a plugin-to-framework message")}));
+          } else
+            throw e;
+        }
+      }, T$.ByteDataNTovoid()));
+      return completer.future;
+    }
+    setMessageHandler(channel, handler) {
+      if (handler == null)
+        this[_handlers][$remove](channel);
+      else
+        this[_handlers][$_set](channel, handler);
+    }
+  };
+  (plugin_registry.Registrar.new = function(binaryMessenger = null) {
+    this[_handlers] = new (T$.IdentityMapOfString$ByteDataNToFutureNOfByteDataN()).new();
+    plugin_registry.Registrar.__proto__.new.call(this);
+    ;
+  }).prototype = plugin_registry.Registrar.prototype;
+  dart.addTypeTests(plugin_registry.Registrar);
+  dart.addTypeCaches(plugin_registry.Registrar);
+  dart.setMethodSignature(plugin_registry.Registrar, () => ({
+    __proto__: dart.getMethods(plugin_registry.Registrar.__proto__),
+    registerMessageHandler: dart.fnType(dart.void, []),
+    handlePlatformMessage: dart.fnType(async.Future$(dart.void), [core.String, dart.nullable(typed_data.ByteData), dart.nullable(dart.fnType(dart.void, [dart.nullable(typed_data.ByteData)]))]),
+    handleFrameworkMessage: dart.fnType(async.Future$(dart.void), [core.String, dart.nullable(typed_data.ByteData), dart.nullable(dart.fnType(dart.void, [dart.nullable(typed_data.ByteData)]))]),
+    send: dart.fnType(async.Future$(dart.nullable(typed_data.ByteData)), [core.String, dart.nullable(typed_data.ByteData)]),
+    setMessageHandler: dart.fnType(dart.void, [core.String, dart.nullable(dart.fnType(dart.nullable(async.Future$(dart.nullable(typed_data.ByteData))), [dart.nullable(typed_data.ByteData)]))])
+  }));
+  dart.setGetterSignature(plugin_registry.Registrar, () => ({
+    __proto__: dart.getGetters(plugin_registry.Registrar.__proto__),
+    messenger: binary_messenger.BinaryMessenger
+  }));
+  dart.setLibraryUri(plugin_registry.Registrar, I[5]);
+  dart.setFieldSignature(plugin_registry.Registrar, () => ({
+    __proto__: dart.getFields(plugin_registry.Registrar.__proto__),
+    [_handlers]: dart.finalFieldType(core.Map$(core.String, dart.fnType(dart.nullable(async.Future$(dart.nullable(typed_data.ByteData))), [dart.nullable(typed_data.ByteData)])))
+  }));
+  plugin_registry.PluginRegistry = class PluginRegistry extends plugin_registry.Registrar {
+    registrarFor(key) {
+      return this;
+    }
+  };
+  (plugin_registry.PluginRegistry.new = function(binaryMessenger = null) {
+    plugin_registry.PluginRegistry.__proto__.new.call(this);
+    ;
+  }).prototype = plugin_registry.PluginRegistry.prototype;
+  dart.addTypeTests(plugin_registry.PluginRegistry);
+  dart.addTypeCaches(plugin_registry.PluginRegistry);
+  dart.setMethodSignature(plugin_registry.PluginRegistry, () => ({
+    __proto__: dart.getMethods(plugin_registry.PluginRegistry.__proto__),
+    registrarFor: dart.fnType(plugin_registry.Registrar, [core.Type])
+  }));
+  dart.setLibraryUri(plugin_registry.PluginRegistry, I[5]);
+  dart.copyProperties(plugin_registry, {
+    get webPluginRegistry() {
+      return plugin_registry.PluginRegistry.as(plugin_registry.webPluginRegistrar);
+    },
+    get pluginBinaryMessenger() {
+      return plugin_registry.webPluginRegistrar;
+    }
+  });
+  dart.defineLazy(plugin_registry, {
+    /*plugin_registry.webPluginRegistrar*/get webPluginRegistrar() {
+      return new plugin_registry.PluginRegistry.new();
+    }
+  }, false);
+  var _isSafari = dart.privateName(url_launcher_web, "_isSafari");
+  var _window = dart.privateName(url_launcher_web, "_window");
+  var _instanceToken = dart.privateName(plugin_platform_interface, "_instanceToken");
+  plugin_platform_interface.PlatformInterface = class PlatformInterface extends core.Object {
+    static verifyToken(instance, token) {
+      if (plugin_platform_interface.MockPlatformInterfaceMixin.is(instance)) {
+        let assertionsEnabled = false;
+        if (!dart.fn(() => {
+          assertionsEnabled = true;
+          return true;
+        }, T$.VoidTobool())()) dart.assertFailed(null, I[6], 62, 14, "() {\n        assertionsEnabled = true;\n        return true;\n      }()");
+        if (!assertionsEnabled) {
+          dart.throw(new core.AssertionError.new("`MockPlatformInterfaceMixin` is not intended for use in release builds."));
+        }
+        return;
+      }
+      if (token !== instance[_instanceToken]) {
+        dart.throw(new core.AssertionError.new("Platform interfaces must not be implemented with `implements`"));
+      }
+    }
+  };
+  (plugin_platform_interface.PlatformInterface.new = function(opts) {
+    let token = opts && 'token' in opts ? opts.token : null;
+    this[_instanceToken] = token;
+    ;
+  }).prototype = plugin_platform_interface.PlatformInterface.prototype;
+  dart.addTypeTests(plugin_platform_interface.PlatformInterface);
+  dart.addTypeCaches(plugin_platform_interface.PlatformInterface);
+  dart.setLibraryUri(plugin_platform_interface.PlatformInterface, I[7]);
+  dart.setFieldSignature(plugin_platform_interface.PlatformInterface, () => ({
+    __proto__: dart.getFields(plugin_platform_interface.PlatformInterface.__proto__),
+    [_instanceToken]: dart.finalFieldType(dart.nullable(core.Object))
+  }));
+  url_launcher_platform_interface.UrlLauncherPlatform = class UrlLauncherPlatform extends plugin_platform_interface.PlatformInterface {
+    static get instance() {
+      return url_launcher_platform_interface.UrlLauncherPlatform._instance;
+    }
+    static set instance(instance) {
+      plugin_platform_interface.PlatformInterface.verifyToken(instance, url_launcher_platform_interface.UrlLauncherPlatform._token);
+      url_launcher_platform_interface.UrlLauncherPlatform._instance = instance;
+    }
+    canLaunch(url) {
+      dart.throw(new core.UnimplementedError.new("canLaunch() has not been implemented."));
+    }
+    launch(url, opts) {
+      let useSafariVC = opts && 'useSafariVC' in opts ? opts.useSafariVC : null;
+      let useWebView = opts && 'useWebView' in opts ? opts.useWebView : null;
+      let enableJavaScript = opts && 'enableJavaScript' in opts ? opts.enableJavaScript : null;
+      let enableDomStorage = opts && 'enableDomStorage' in opts ? opts.enableDomStorage : null;
+      let universalLinksOnly = opts && 'universalLinksOnly' in opts ? opts.universalLinksOnly : null;
+      let headers = opts && 'headers' in opts ? opts.headers : null;
+      let webOnlyWindowName = opts && 'webOnlyWindowName' in opts ? opts.webOnlyWindowName : null;
+      dart.throw(new core.UnimplementedError.new("launch() has not been implemented."));
+    }
+    closeWebView() {
+      dart.throw(new core.UnimplementedError.new("closeWebView() has not been implemented."));
+    }
+  };
+  (url_launcher_platform_interface.UrlLauncherPlatform.new = function() {
+    url_launcher_platform_interface.UrlLauncherPlatform.__proto__.new.call(this, {token: url_launcher_platform_interface.UrlLauncherPlatform._token});
+    ;
+  }).prototype = url_launcher_platform_interface.UrlLauncherPlatform.prototype;
+  dart.addTypeTests(url_launcher_platform_interface.UrlLauncherPlatform);
+  dart.addTypeCaches(url_launcher_platform_interface.UrlLauncherPlatform);
+  dart.setMethodSignature(url_launcher_platform_interface.UrlLauncherPlatform, () => ({
+    __proto__: dart.getMethods(url_launcher_platform_interface.UrlLauncherPlatform.__proto__),
+    canLaunch: dart.fnType(async.Future$(core.bool), [core.String]),
+    launch: dart.fnType(async.Future$(core.bool), [core.String], {webOnlyWindowName: dart.nullable(core.String)}, {enableDomStorage: core.bool, enableJavaScript: core.bool, headers: core.Map$(core.String, core.String), universalLinksOnly: core.bool, useSafariVC: core.bool, useWebView: core.bool}),
+    closeWebView: dart.fnType(async.Future$(dart.void), [])
+  }));
+  dart.setLibraryUri(url_launcher_platform_interface.UrlLauncherPlatform, I[8]);
+  dart.defineLazy(url_launcher_platform_interface.UrlLauncherPlatform, {
+    /*url_launcher_platform_interface.UrlLauncherPlatform._token*/get _token() {
+      return new core.Object.new();
+    },
+    /*url_launcher_platform_interface.UrlLauncherPlatform._instance*/get _instance() {
+      return new method_channel_url_launcher.MethodChannelUrlLauncher.new();
+    },
+    set _instance(_) {}
+  }, false);
+  url_launcher_web.UrlLauncherPlugin = class UrlLauncherPlugin extends url_launcher_platform_interface.UrlLauncherPlatform {
+    static registerWith(registrar) {
+      url_launcher_platform_interface.UrlLauncherPlatform.instance = new url_launcher_web.UrlLauncherPlugin.new();
+      ui.platformViewRegistry.registerViewFactory("__url_launcher::link", link$.linkViewFactory);
+    }
+    get linkDelegate() {
+      return dart.fn(linkInfo => new link$.WebLinkDelegate.new(linkInfo), T$.LinkInfoToWebLinkDelegate());
+    }
+    openNewWindow(url, opts) {
+      let t6;
+      let webOnlyWindowName = opts && 'webOnlyWindowName' in opts ? opts.webOnlyWindowName : null;
+      let target = (t6 = webOnlyWindowName, t6 == null ? this[_isSafari] && url_launcher_web._isSafariTargetTopScheme(url) ? "_top" : "" : t6);
+      return this[_window][$open](url, target);
+    }
+    canLaunch(url) {
+      return T$.FutureOfbool().value(url_launcher_web.UrlLauncherPlugin._supportedSchemes.contains(url_launcher_web._getUrlScheme(url)));
+    }
+    launch(url, opts) {
+      let useSafariVC = opts && 'useSafariVC' in opts ? opts.useSafariVC : false;
+      let useWebView = opts && 'useWebView' in opts ? opts.useWebView : false;
+      let enableJavaScript = opts && 'enableJavaScript' in opts ? opts.enableJavaScript : false;
+      let enableDomStorage = opts && 'enableDomStorage' in opts ? opts.enableDomStorage : false;
+      let universalLinksOnly = opts && 'universalLinksOnly' in opts ? opts.universalLinksOnly : false;
+      let headers = opts && 'headers' in opts ? opts.headers : C[23] || CT.C23;
+      let webOnlyWindowName = opts && 'webOnlyWindowName' in opts ? opts.webOnlyWindowName : null;
+      return T$.FutureOfbool().value(this.openNewWindow(url, {webOnlyWindowName: webOnlyWindowName}) !== null);
+    }
+  };
+  (url_launcher_web.UrlLauncherPlugin.new = function(opts) {
+    let t6;
+    let debugWindow = opts && 'debugWindow' in opts ? opts.debugWindow : null;
+    this[_isSafari] = false;
+    this[_window] = (t6 = debugWindow, t6 == null ? html.window : t6);
+    url_launcher_web.UrlLauncherPlugin.__proto__.new.call(this);
+    this[_isSafari] = browser.navigatorIsSafari(this[_window][$navigator]);
+  }).prototype = url_launcher_web.UrlLauncherPlugin.prototype;
+  dart.addTypeTests(url_launcher_web.UrlLauncherPlugin);
+  dart.addTypeCaches(url_launcher_web.UrlLauncherPlugin);
+  dart.setMethodSignature(url_launcher_web.UrlLauncherPlugin, () => ({
+    __proto__: dart.getMethods(url_launcher_web.UrlLauncherPlugin.__proto__),
+    openNewWindow: dart.fnType(html.WindowBase, [core.String], {webOnlyWindowName: dart.nullable(core.String)}, {}),
+    launch: dart.fnType(async.Future$(core.bool), [core.String], {enableDomStorage: core.bool, enableJavaScript: core.bool, headers: core.Map$(core.String, core.String), universalLinksOnly: core.bool, useSafariVC: core.bool, useWebView: core.bool, webOnlyWindowName: dart.nullable(core.String)}, {})
+  }));
+  dart.setGetterSignature(url_launcher_web.UrlLauncherPlugin, () => ({
+    __proto__: dart.getGetters(url_launcher_web.UrlLauncherPlugin.__proto__),
+    linkDelegate: dart.fnType(framework.Widget, [link.LinkInfo])
+  }));
+  dart.setLibraryUri(url_launcher_web.UrlLauncherPlugin, I[9]);
+  dart.setFieldSignature(url_launcher_web.UrlLauncherPlugin, () => ({
+    __proto__: dart.getFields(url_launcher_web.UrlLauncherPlugin.__proto__),
+    [_window]: dart.fieldType(html.Window),
+    [_isSafari]: dart.fieldType(core.bool)
+  }));
+  dart.defineLazy(url_launcher_web.UrlLauncherPlugin, {
+    /*url_launcher_web.UrlLauncherPlugin._supportedSchemes*/get _supportedSchemes() {
+      return T$.LinkedHashSetOfString().from(["http", "https"]).union(url_launcher_web._safariTargetTopSchemes);
+    }
+  }, false);
+  url_launcher_web._getUrlScheme = function _getUrlScheme(url) {
+    let t6;
+    t6 = core.Uri.tryParse(url);
+    return t6 == null ? null : t6.scheme;
+  };
+  url_launcher_web._isSafariTargetTopScheme = function _isSafariTargetTopScheme(url) {
+    return url_launcher_web._safariTargetTopSchemes.contains(url_launcher_web._getUrlScheme(url));
+  };
+  dart.defineLazy(url_launcher_web, {
+    /*url_launcher_web._safariTargetTopSchemes*/get _safariTargetTopSchemes() {
+      return C[24] || CT.C24;
+    }
+  }, false);
+  var name$0 = dart.privateName(js$, "JS.name");
+  js$.JS = class JS extends core.Object {
+    get name() {
+      return this[name$0];
+    }
+    set name(value) {
+      super.name = value;
+    }
+  };
+  (js$.JS.new = function(name = null) {
+    this[name$0] = name;
+    ;
+  }).prototype = js$.JS.prototype;
+  dart.addTypeTests(js$.JS);
+  dart.addTypeCaches(js$.JS);
+  dart.setLibraryUri(js$.JS, I[10]);
+  dart.setFieldSignature(js$.JS, () => ({
+    __proto__: dart.getFields(js$.JS.__proto__),
+    name: dart.finalFieldType(dart.nullable(core.String))
+  }));
+  js$._Anonymous = class _Anonymous extends core.Object {};
+  (js$._Anonymous.new = function() {
+    ;
+  }).prototype = js$._Anonymous.prototype;
+  dart.addTypeTests(js$._Anonymous);
+  dart.addTypeCaches(js$._Anonymous);
+  dart.setLibraryUri(js$._Anonymous, I[10]);
+  dart.defineLazy(js$, {
+    /*js$.anonymous*/get anonymous() {
+      return C[25] || CT.C25;
+    }
+  }, false);
+  var debugLabel$ = dart.privateName(link, "LinkTarget.debugLabel");
+  link.LinkTarget = class LinkTarget extends core.Object {
+    get debugLabel() {
+      return this[debugLabel$];
+    }
+    set debugLabel(value) {
+      super.debugLabel = value;
+    }
+  };
+  (link.LinkTarget.__ = function(opts) {
+    let debugLabel = opts && 'debugLabel' in opts ? opts.debugLabel : null;
+    this[debugLabel$] = debugLabel;
+    ;
+  }).prototype = link.LinkTarget.prototype;
+  dart.addTypeTests(link.LinkTarget);
+  dart.addTypeCaches(link.LinkTarget);
+  dart.setLibraryUri(link.LinkTarget, I[11]);
+  dart.setFieldSignature(link.LinkTarget, () => ({
+    __proto__: dart.getFields(link.LinkTarget.__proto__),
+    debugLabel: dart.finalFieldType(core.String)
+  }));
+  dart.defineLazy(link.LinkTarget, {
+    /*link.LinkTarget.defaultTarget*/get defaultTarget() {
+      return C[26] || CT.C26;
+    },
+    /*link.LinkTarget.self*/get self() {
+      return C[27] || CT.C27;
+    },
+    /*link.LinkTarget.blank*/get blank() {
+      return C[28] || CT.C28;
+    }
+  }, false);
+  link.LinkInfo = class LinkInfo extends core.Object {};
+  (link.LinkInfo.new = function() {
+    ;
+  }).prototype = link.LinkInfo.prototype;
+  dart.addTypeTests(link.LinkInfo);
+  dart.addTypeCaches(link.LinkInfo);
+  dart.setLibraryUri(link.LinkInfo, I[11]);
+  link.pushRouteNameToFramework = function pushRouteNameToFramework(_, routeName) {
+    let t6, t6$;
+    let completer = T$.CompleterOfByteData().new();
+    system_navigator.SystemNavigator.routeInformationUpdated({location: routeName});
+    let sendMessage = (t6$ = (t6 = link._ambiguate(binding.WidgetsBinding, binding.WidgetsBinding.instance), t6 == null ? null : t6.platformDispatcher.onPlatformMessage), t6$ == null ? dart.bind(ui.channelBuffers, 'push') : t6$);
+    sendMessage("flutter/navigation", link._codec.encodeMethodCall(new message_codec.MethodCall.new("pushRouteInformation", new _js_helper.LinkedMap.from(["location", routeName, "state", null]))), dart.bind(completer, 'complete'));
+    return completer.future;
+  };
+  link._ambiguate = function _ambiguate(T, value) {
+    return value;
+  };
+  dart.defineLazy(link, {
+    /*link._codec*/get _codec() {
+      return C[29] || CT.C29;
+    }
+  }, false);
+  var link$0 = dart.privateName(link$, "WebLinkDelegate.link");
+  link$.WebLinkDelegate = class WebLinkDelegate extends framework.StatefulWidget {
+    get link() {
+      return this[link$0];
+    }
+    set link(value) {
+      super.link = value;
+    }
+    createState() {
+      return new link$.WebLinkDelegateState.new();
+    }
+  };
+  (link$.WebLinkDelegate.new = function(link) {
+    this[link$0] = link;
+    link$.WebLinkDelegate.__proto__.new.call(this);
+    ;
+  }).prototype = link$.WebLinkDelegate.prototype;
+  dart.addTypeTests(link$.WebLinkDelegate);
+  dart.addTypeCaches(link$.WebLinkDelegate);
+  dart.setMethodSignature(link$.WebLinkDelegate, () => ({
+    __proto__: dart.getMethods(link$.WebLinkDelegate.__proto__),
+    createState: dart.fnType(link$.WebLinkDelegateState, [])
+  }));
+  dart.setLibraryUri(link$.WebLinkDelegate, I[12]);
+  dart.setFieldSignature(link$.WebLinkDelegate, () => ({
+    __proto__: dart.getFields(link$.WebLinkDelegate.__proto__),
+    link: dart.finalFieldType(link.LinkInfo)
+  }));
+  var __WebLinkDelegateState__controller = dart.privateName(link$, "_#WebLinkDelegateState#_controller");
+  var _controller = dart.privateName(link$, "_controller");
+  var _followLink = dart.privateName(link$, "_followLink");
+  link$.WebLinkDelegateState = class WebLinkDelegateState extends framework.State$(link$.WebLinkDelegate) {
+    get [_controller]() {
+      let t6;
+      t6 = this[__WebLinkDelegateState__controller];
+      return t6 == null ? dart.throw(new _internal.LateError.fieldNI("_controller")) : t6;
+    }
+    set [_controller](t6) {
+      this[__WebLinkDelegateState__controller] = t6;
+    }
+    didUpdateWidget(oldWidget) {
+      link$.WebLinkDelegate.as(oldWidget);
+      super.didUpdateWidget(oldWidget);
+      if (!dart.equals(this.widget.link.uri, oldWidget.link.uri)) {
+        this[_controller].setUri(this.widget.link.uri);
+      }
+      if (!this.widget.link.target[$_equals](oldWidget.link.target)) {
+        this[_controller].setTarget(this.widget.link.target);
+      }
+    }
+    [_followLink]() {
+      link$.LinkViewController.registerHitTest(this[_controller]);
+      return T$.FutureOfvoid().value();
+    }
+    build(context) {
+      let t9, t8, t7;
+      return new basic.Stack.new({fit: stack.StackFit.passthrough, children: T$.JSArrayOfWidget().of([(t7 = this.widget.link, t8 = context, t9 = this.widget.link.isDisabled ? null : dart.bind(this, _followLink), t7.builder(t8, t9)), new basic.Positioned.fill({child: new platform_view.PlatformViewLink.new({viewType: "__url_launcher::link", onCreatePlatformView: dart.fn(params => {
+                let t7;
+                this[_controller] = link$.LinkViewController.fromParams(params, context);
+                t7 = this[_controller];
+                return (() => {
+                  t7.setUri(this.widget.link.uri);
+                  t7.setTarget(this.widget.link.target);
+                  return t7;
+                })();
+              }, T$.PlatformViewCreationParamsToLinkViewController()), surfaceFactory: dart.fn((context, controller) => new platform_view.PlatformViewSurface.new({controller: controller, gestureRecognizers: new (T$._HashSetOfFactoryOfOneSequenceGestureRecognizer()).new(), hitTestBehavior: platform_view$.PlatformViewHitTestBehavior.transparent}), T$.BuildContextAndPlatformViewControllerToPlatformViewSurface())})})])});
+    }
+  };
+  (link$.WebLinkDelegateState.new = function() {
+    this[__WebLinkDelegateState__controller] = null;
+    link$.WebLinkDelegateState.__proto__.new.call(this);
+    ;
+  }).prototype = link$.WebLinkDelegateState.prototype;
+  dart.addTypeTests(link$.WebLinkDelegateState);
+  dart.addTypeCaches(link$.WebLinkDelegateState);
+  dart.setMethodSignature(link$.WebLinkDelegateState, () => ({
+    __proto__: dart.getMethods(link$.WebLinkDelegateState.__proto__),
+    [_followLink]: dart.fnType(async.Future$(dart.void), []),
+    build: dart.fnType(framework.Widget, [framework.BuildContext])
+  }));
+  dart.setGetterSignature(link$.WebLinkDelegateState, () => ({
+    __proto__: dart.getGetters(link$.WebLinkDelegateState.__proto__),
+    [_controller]: link$.LinkViewController
+  }));
+  dart.setSetterSignature(link$.WebLinkDelegateState, () => ({
+    __proto__: dart.getSetters(link$.WebLinkDelegateState.__proto__),
+    [_controller]: link$.LinkViewController
+  }));
+  dart.setLibraryUri(link$.WebLinkDelegateState, I[12]);
+  dart.setFieldSignature(link$.WebLinkDelegateState, () => ({
+    __proto__: dart.getFields(link$.WebLinkDelegateState.__proto__),
+    [__WebLinkDelegateState__controller]: dart.fieldType(dart.nullable(link$.LinkViewController))
+  }));
+  var viewId$ = dart.privateName(link$, "LinkViewController.viewId");
+  var context$ = dart.privateName(link$, "LinkViewController.context");
+  var __LinkViewController__element = dart.privateName(link$, "_#LinkViewController#_element");
+  var _uri = dart.privateName(link$, "_uri");
+  var _initialize = dart.privateName(link$, "_initialize");
+  var _element = dart.privateName(link$, "_element");
+  var _onDomClick = dart.privateName(link$, "_onDomClick");
+  var _isInitialized = dart.privateName(link$, "_isInitialized");
+  var _getHtmlTarget = dart.privateName(link$, "_getHtmlTarget");
+  link$.LinkViewController = class LinkViewController extends platform_views.PlatformViewController {
+    get viewId() {
+      return this[viewId$];
+    }
+    set viewId(value) {
+      super.viewId = value;
+    }
+    get context() {
+      return this[context$];
+    }
+    set context(value) {
+      super.context = value;
+    }
+    static fromParams(params, context) {
+      let viewId = params.id;
+      let controller = new link$.LinkViewController.new(viewId, context);
+      controller[_initialize]().then(core.Null, dart.fn(_ => {
+        let t8, t7;
+        t7 = params;
+        t8 = viewId;
+        t7.onPlatformViewCreated(t8);
+      }, T$.voidToNull()));
+      return controller;
+    }
+    static _viewFactory(viewId) {
+      return dart.nullCheck(link$.LinkViewController._instances[$_get](viewId))[_element];
+    }
+    static get _clickSubscription() {
+      let t7;
+      t7 = link$.LinkViewController['_#_clickSubscription'];
+      return t7 == null ? dart.throw(new _internal.LateError.fieldNI("_clickSubscription")) : t7;
+    }
+    static set _clickSubscription(t7) {
+      link$.LinkViewController['_#_clickSubscription'] = t7;
+    }
+    static _onGlobalClick(event) {
+      let t8;
+      let viewId = link$.getViewIdFromTarget(event);
+      t8 = link$.LinkViewController._instances[$_get](viewId);
+      t8 == null ? null : t8[_onDomClick](event);
+      link$.LinkViewController.unregisterHitTest();
+    }
+    static registerHitTest(controller) {
+      link$.LinkViewController._hitTestedViewId = controller.viewId;
+    }
+    static unregisterHitTest() {
+      link$.LinkViewController._hitTestedViewId = null;
+    }
+    get [_element]() {
+      let t8;
+      t8 = this[__LinkViewController__element];
+      return t8 == null ? dart.throw(new _internal.LateError.fieldNI("_element")) : t8;
+    }
+    set [_element](t8) {
+      this[__LinkViewController__element] = t8;
+    }
+    get [_isInitialized]() {
+      return this[_element] !== null;
+    }
+    [_initialize]() {
+      return async.async(dart.void, (function* _initialize() {
+        let t9;
+        this[_element] = html.Element.tag("a");
+        js_util._setPropertyUnchecked(this[_element], "__url_launcher::link::viewId", this.viewId);
+        t9 = this[_element][$style];
+        (() => {
+          t9[$opacity] = "0";
+          t9[$display] = "block";
+          t9[$width] = "100%";
+          t9[$height] = "100%";
+          t9[$cursor] = "unset";
+          return t9;
+        })();
+        this[_element][$setAttribute]("rel", "noreferrer noopener");
+        let args = new (T$.IdentityMapOfString$dynamic()).from(["id", this.viewId, "viewType", "__url_launcher::link"]);
+        yield system_channels.SystemChannels.platform_views.invokeMethod(dart.void, "create", args);
+      }).bind(this));
+    }
+    [_onDomClick](event) {
+      let isHitTested = link$.LinkViewController._hitTestedViewId === this.viewId;
+      if (!isHitTested) {
+        event.preventDefault();
+        return;
+      }
+      if (this[_uri] != null && dart.nullCheck(this[_uri]).hasScheme) {
+        return;
+      }
+      event.preventDefault();
+      let routeName = dart.toString(this[_uri]);
+      link.pushRouteNameToFramework(this.context, routeName);
+    }
+    setUri(uri) {
+      if (!this[_isInitialized]) dart.assertFailed(null, I[13], 218, 12, "_isInitialized");
+      this[_uri] = uri;
+      if (uri == null) {
+        this[_element][$removeAttribute]("href");
+      } else {
+        this[_element][$setAttribute]("href", dart.toString(uri));
+      }
+    }
+    setTarget(target) {
+      if (!this[_isInitialized]) dart.assertFailed(null, I[13], 229, 12, "_isInitialized");
+      this[_element][$setAttribute]("target", this[_getHtmlTarget](target));
+    }
+    [_getHtmlTarget](target) {
+      switch (target) {
+        case C[26] || CT.C26:
+        case C[27] || CT.C27:
+        {
+          return "_self";
+        }
+        case C[28] || CT.C28:
+        {
+          return "_blank";
+        }
+        default:
+        {
+          dart.throw(core.Exception.new("Unknown LinkTarget value " + dart.str(target) + "."));
+        }
+      }
+    }
+    clearFocus() {
+      return async.async(dart.void, function* clearFocus() {
+      });
+    }
+    dispatchPointerEvent(event) {
+      return async.async(dart.void, function* dispatchPointerEvent() {
+      });
+    }
+    dispose() {
+      return async.async(dart.void, (function* dispose() {
+        if (this[_isInitialized]) {
+          if (!dart.equals(link$.LinkViewController._instances[$_get](this.viewId), this)) dart.assertFailed(null, I[13], 260, 14, "_instances[viewId] == this");
+          link$.LinkViewController._instances[$remove](this.viewId);
+          if (link$.LinkViewController._instances[$isEmpty]) {
+            yield link$.LinkViewController._clickSubscription.cancel();
+          }
+          yield system_channels.SystemChannels.platform_views.invokeMethod(dart.void, "dispose", this.viewId);
+        }
+      }).bind(this));
+    }
+  };
+  (link$.LinkViewController.new = function(viewId, context) {
+    this[__LinkViewController__element] = null;
+    this[_uri] = null;
+    this[viewId$] = viewId;
+    this[context$] = context;
+    if (link$.LinkViewController._instances[$isEmpty]) {
+      link$.LinkViewController._clickSubscription = html.window[$onClick].listen(C[30] || CT.C30);
+    }
+    link$.LinkViewController._instances[$_set](this.viewId, this);
+  }).prototype = link$.LinkViewController.prototype;
+  dart.addTypeTests(link$.LinkViewController);
+  dart.addTypeCaches(link$.LinkViewController);
+  dart.setMethodSignature(link$.LinkViewController, () => ({
+    __proto__: dart.getMethods(link$.LinkViewController.__proto__),
+    [_initialize]: dart.fnType(async.Future$(dart.void), []),
+    [_onDomClick]: dart.fnType(dart.void, [html.MouseEvent]),
+    setUri: dart.fnType(dart.void, [dart.nullable(core.Uri)]),
+    setTarget: dart.fnType(dart.void, [link.LinkTarget]),
+    [_getHtmlTarget]: dart.fnType(core.String, [link.LinkTarget]),
+    clearFocus: dart.fnType(async.Future$(dart.void), []),
+    dispatchPointerEvent: dart.fnType(async.Future$(dart.void), [events.PointerEvent]),
+    dispose: dart.fnType(async.Future$(dart.void), [])
+  }));
+  dart.setGetterSignature(link$.LinkViewController, () => ({
+    __proto__: dart.getGetters(link$.LinkViewController.__proto__),
+    [_element]: html.Element,
+    [_isInitialized]: core.bool
+  }));
+  dart.setSetterSignature(link$.LinkViewController, () => ({
+    __proto__: dart.getSetters(link$.LinkViewController.__proto__),
+    [_element]: html.Element
+  }));
+  dart.setLibraryUri(link$.LinkViewController, I[12]);
+  dart.setFieldSignature(link$.LinkViewController, () => ({
+    __proto__: dart.getFields(link$.LinkViewController.__proto__),
+    viewId: dart.finalFieldType(core.int),
+    context: dart.finalFieldType(framework.BuildContext),
+    [__LinkViewController__element]: dart.fieldType(dart.nullable(html.Element)),
+    [_uri]: dart.fieldType(dart.nullable(core.Uri))
+  }));
+  dart.defineLazy(link$.LinkViewController, {
+    /*link$.LinkViewController._instances*/get _instances() {
+      return new (T$.IdentityMapOfint$LinkViewController()).new();
+    },
+    set _instances(_) {},
+    /*link$.LinkViewController._hitTestedViewId*/get _hitTestedViewId() {
+      return null;
+    },
+    set _hitTestedViewId(_) {},
+    /*link$.LinkViewController['_#_clickSubscription']*/get ['_#_clickSubscription']() {
+      return null;
+    },
+    set ['_#_clickSubscription'](_) {}
+  }, false);
+  link$.getViewIdFromTarget = function getViewIdFromTarget(event) {
+    let linkElement = link$.getLinkElementFromTarget(event);
+    if (linkElement != null) {
+      return T$.intN().as(linkElement["__url_launcher::link::viewId"]);
+    }
+    return null;
+  };
+  link$.getLinkElementFromTarget = function getLinkElementFromTarget(event) {
+    let target = event[$target];
+    if (target != null && html.Element.is(target)) {
+      if (link$.isLinkElement(target)) {
+        return target;
+      }
+      if (target[$shadowRoot] != null) {
+        let child = dart.nullCheck(target[$shadowRoot]).lastChild;
+        if (child != null && html.Element.is(child) && link$.isLinkElement(child)) {
+          return child;
+        }
+      }
+    }
+    return null;
+  };
+  link$.isLinkElement = function isLinkElement(element) {
+    return element != null && element[$tagName] === "A" && js_util.hasProperty(element, "__url_launcher::link::viewId");
+  };
+  dart.copyProperties(link$, {
+    get linkViewFactory() {
+      return C[31] || CT.C31;
+    }
+  });
+  dart.defineLazy(link$, {
+    /*link$.linkViewType*/get linkViewType() {
+      return "__url_launcher::link";
+    },
+    /*link$.linkViewIdProperty*/get linkViewIdProperty() {
+      return "__url_launcher::link::viewId";
+    }
+  }, false);
+  browser.navigatorIsSafari = function navigatorIsSafari(navigator) {
+    let vendor = navigator[$vendor];
+    let appVersion = navigator[$appVersion];
+    return vendor !== null && vendor[$contains]("Apple") && appVersion !== null && appVersion[$contains]("Version");
+  };
+  plugin_platform_interface.MockPlatformInterfaceMixin = class MockPlatformInterfaceMixin extends core.Object {};
+  (plugin_platform_interface.MockPlatformInterfaceMixin.new = function() {
+    ;
+  }).prototype = plugin_platform_interface.MockPlatformInterfaceMixin.prototype;
+  dart.addTypeTests(plugin_platform_interface.MockPlatformInterfaceMixin);
+  dart.addTypeCaches(plugin_platform_interface.MockPlatformInterfaceMixin);
+  plugin_platform_interface.MockPlatformInterfaceMixin[dart.implements] = () => [plugin_platform_interface.PlatformInterface];
+  dart.setLibraryUri(plugin_platform_interface.MockPlatformInterfaceMixin, I[7]);
+  var linkDelegate = dart.privateName(method_channel_url_launcher, "MethodChannelUrlLauncher.linkDelegate");
+  method_channel_url_launcher.MethodChannelUrlLauncher = class MethodChannelUrlLauncher extends url_launcher_platform_interface.UrlLauncherPlatform {
+    get linkDelegate() {
+      return this[linkDelegate];
+    }
+    set linkDelegate(value) {
+      super.linkDelegate = value;
+    }
+    canLaunch(url) {
+      return method_channel_url_launcher._channel.invokeMethod(core.bool, "canLaunch", new (T$.IdentityMapOfString$Object()).from(["url", url])).then(core.bool, dart.fn(value => {
+        let t9;
+        t9 = value;
+        return t9 == null ? false : t9;
+      }, T$.boolNTobool()));
+    }
+    closeWebView() {
+      return method_channel_url_launcher._channel.invokeMethod(dart.void, "closeWebView");
+    }
+    launch(url, opts) {
+      let useSafariVC = opts && 'useSafariVC' in opts ? opts.useSafariVC : null;
+      let useWebView = opts && 'useWebView' in opts ? opts.useWebView : null;
+      let enableJavaScript = opts && 'enableJavaScript' in opts ? opts.enableJavaScript : null;
+      let enableDomStorage = opts && 'enableDomStorage' in opts ? opts.enableDomStorage : null;
+      let universalLinksOnly = opts && 'universalLinksOnly' in opts ? opts.universalLinksOnly : null;
+      let headers = opts && 'headers' in opts ? opts.headers : null;
+      let webOnlyWindowName = opts && 'webOnlyWindowName' in opts ? opts.webOnlyWindowName : null;
+      return method_channel_url_launcher._channel.invokeMethod(core.bool, "launch", new (T$.IdentityMapOfString$Object()).from(["url", url, "useSafariVC", useSafariVC, "useWebView", useWebView, "enableJavaScript", enableJavaScript, "enableDomStorage", enableDomStorage, "universalLinksOnly", universalLinksOnly, "headers", headers])).then(core.bool, dart.fn(value => {
+        let t9;
+        t9 = value;
+        return t9 == null ? false : t9;
+      }, T$.boolNTobool()));
+    }
+  };
+  (method_channel_url_launcher.MethodChannelUrlLauncher.new = function() {
+    this[linkDelegate] = null;
+    method_channel_url_launcher.MethodChannelUrlLauncher.__proto__.new.call(this);
+    ;
+  }).prototype = method_channel_url_launcher.MethodChannelUrlLauncher.prototype;
+  dart.addTypeTests(method_channel_url_launcher.MethodChannelUrlLauncher);
+  dart.addTypeCaches(method_channel_url_launcher.MethodChannelUrlLauncher);
+  dart.setLibraryUri(method_channel_url_launcher.MethodChannelUrlLauncher, I[14]);
+  dart.setFieldSignature(method_channel_url_launcher.MethodChannelUrlLauncher, () => ({
+    __proto__: dart.getFields(method_channel_url_launcher.MethodChannelUrlLauncher.__proto__),
+    linkDelegate: dart.finalFieldType(dart.nullable(dart.fnType(framework.Widget, [link.LinkInfo])))
+  }));
+  var MethodChannel__binaryMessenger = dart.privateName(platform_channel, "MethodChannel._binaryMessenger");
+  var MethodChannel_codec = dart.privateName(platform_channel, "MethodChannel.codec");
+  var MethodChannel_name = dart.privateName(platform_channel, "MethodChannel.name");
+  dart.defineLazy(method_channel_url_launcher, {
+    /*method_channel_url_launcher._channel*/get _channel() {
+      return C[32] || CT.C32;
+    }
+  }, false);
+  dart.trackLibraries("dartpad_main", {
+    "package:dartpad_sample/bootstrap.dart": bootstrap,
+    "package:flutter_web_plugins/flutter_web_plugins.dart": flutter_web_plugins,
+    "package:dartpad_sample/generated_plugin_registrant.dart": generated_plugin_registrant,
+    "package:dartpad_sample/main.dart": main,
+    "package:flutter_web_plugins/src/navigation/js_url_strategy.dart": js_url_strategy,
+    "package:flutter_web_plugins/src/navigation/url_strategy.dart": url_strategy,
+    "package:flutter_web_plugins/src/navigation/utils.dart": utils,
+    "package:flutter_web_plugins/src/plugin_event_channel.dart": plugin_event_channel,
+    "package:flutter_web_plugins/src/plugin_registry.dart": plugin_registry,
+    "package:url_launcher_web/url_launcher_web.dart": url_launcher_web,
+    "package:js/js.dart": js$,
+    "package:url_launcher_web/src/shims/dart_ui.dart": dart_ui,
+    "package:url_launcher_platform_interface/link.dart": link,
+    "package:url_launcher_platform_interface/url_launcher_platform_interface.dart": url_launcher_platform_interface,
+    "package:url_launcher_web/src/link.dart": link$,
+    "package:url_launcher_web/src/third_party/platform_detect/browser.dart": browser,
+    "package:url_launcher_web/src/shims/dart_ui_real.dart": dart_ui_real,
+    "package:plugin_platform_interface/plugin_platform_interface.dart": plugin_platform_interface,
+    "package:url_launcher_platform_interface/method_channel_url_launcher.dart": method_channel_url_launcher
+  }, {
+  }, null);
+  // Exports:
+  return {
+    bootstrap: bootstrap,
+    flutter_web_plugins: flutter_web_plugins,
+    generated_plugin_registrant: generated_plugin_registrant,
+    main: main,
+    src__navigation__js_url_strategy: js_url_strategy,
+    src__navigation__url_strategy: url_strategy,
+    src__navigation__utils: utils,
+    src__plugin_event_channel: plugin_event_channel,
+    src__plugin_registry: plugin_registry,
+    url_launcher_web: url_launcher_web,
+    js: js$,
+    src__shims__dart_ui: dart_ui,
+    link: link,
+    url_launcher_platform_interface: url_launcher_platform_interface,
+    src__link: link$,
+    src__third_party__platform_detect__browser: browser,
+    src__shims__dart_ui_real: dart_ui_real,
+    plugin_platform_interface: plugin_platform_interface,
+    method_channel_url_launcher: method_channel_url_launcher
+  };
+}));
+
+//# sourceMappingURL=main.dart.js.map
+
+require(['dart_sdk'],
+  function(sdk) {
+    'use strict';
+    sdk.developer._extensions.clear();
+    sdk.dart.hotRestart();
+});
+
+require(["dartpad_main", "dart_sdk"], function(dartpad_main, dart_sdk) {
+    // SDK initialization.
+    dart_sdk.dart.setStartAsyncSynchronously(true);
+    dart_sdk._isolate_helper.startRootIsolate(() => {}, []);
+
+    // Loads the `dartpad_main` module and runs its bootstrapped main method.
+    //
+    // DDK provides the user's code in a RequireJS module, which exports an
+    // object that looks something like this:
+    //
+    // {
+    //       [random_tokens]__bootstrap: bootstrap,
+    //       [random_tokens]__main: main
+    // }
+    //
+    // The first of those properties holds the compiled code for the bootstrap
+    // Dart file, which the server uses to wrap the user's code and wait on a
+    // call to dart:ui's `webOnlyInitializePlatform` before executing any of it.
+    //
+    // The loop below iterates over the properties of the exported object,
+    // looking for one that ends in "__bootstrap". Once found, it executes the
+    // bootstrapped main method, which calls the user's main method, which
+    // (presumably) calls runApp and starts Flutter's rendering.
+
+    // TODO: simplify this once we are firmly in a post Flutter 1.24 world.
+    for (var prop in dartpad_main) {
+          if (prop.endsWith("bootstrap")) {
+            dartpad_main[prop].main();
+          }
+    }});
+
+</script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="dart_sdk" src="frame_data/dart_sdk.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="flutter_web" src="frame_data/flutter_web.js"></script><style></style><meta flt-viewport="" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><script src="frame_data/canvaskit.js"></script><meta id="flutterweb-theme" name="theme-color" content="#2196f3"></head>
+<body flt-renderer="canvaskit (auto-selected)" flt-build-mode="debug" style="position: fixed; inset: 0px; overflow: hidden; padding: 0px; margin: 0px; user-select: none; touch-action: none; font: 14px sans-serif; color: red;" spellcheck="false"><flt-glass-pane style="position: absolute; inset: 0px;"></flt-glass-pane></body></html>
