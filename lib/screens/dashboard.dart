@@ -12,68 +12,115 @@ class Dashboard extends StatelessWidget {
   static const routeName = "/dashboard";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Consumer<SharedPreference>(
-          builder: (ctx, val, _) => FutureBuilder(
-            future: val.sharedData(),
-            builder: (ctx, snap) {
-              courseName = val.selectedCourse;
-              return Text(val.selectedCourse);
-            },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Consumer<SharedPreference>(
+            builder: (ctx, val, _) => FutureBuilder(
+              future: val.sharedData(),
+              builder: (ctx, snap) {
+                courseName = val.selectedCourse;
+                return Text(val.selectedCourse);
+              },
+            ),
           ),
         ),
-      ),
-      drawer: const DrawerWidget(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 60,
-              child: ChipList(courseName),
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
-                child: Text(
-                  "Academics",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        drawer: const DrawerWidget(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 60,
+                child: ChipList(courseName),
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
+                  child: Text(
+                    "Academics",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-            ),
-            const DashboardGrid(),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
-                child: Text(
-                  "Carrer Path",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              const DashboardGrid(),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
+                  child: Text(
+                    "Carrer Path",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-            ),
-            const DefaultTabController(
-                length: 3,
-                child: TabBar(
-                  labelColor: Colors.blue,
-                  unselectedLabelColor: Colors.black,
-                  tabs: [
-                    Tab(
-                        child: Text(
-                      "Gate",
-                    )),
-                    Tab(
-                        child: Text(
-                      "Gate",
-                    )),
-                    Tab(
-                        child: Text(
-                      "Gate",
-                    )),
+              const TabBar(
+                labelColor: Colors.blue,
+                unselectedLabelColor: Colors.black,
+                tabs: [
+                  Tab(
+                    child: Text(
+                      "First",
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      "Second",
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      "Third",
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 400,
+                child: TabBarView(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        child: Column(
+                          children: const [
+                            Center(
+                              child: Text("First"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        child: Column(
+                          children: const [
+                            Center(
+                              child: Text("Second"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Card(
+                        child: Column(
+                          children: const [
+                            Center(
+                              child: Text("Third"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
-                ))
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
