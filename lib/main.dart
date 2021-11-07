@@ -1,11 +1,15 @@
 import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/screens/intro_screen.dart';
-
+import 'package:engineering_guide/screens/syllabus.dart';
 import '/providers/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   return runApp(const MyApp());
 }
 
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             Dashboard.routeName: (ctx) => const Dashboard(),
+            Syllabus.routeName: (ctx) => const Syllabus(),
           },
         ),
       ),

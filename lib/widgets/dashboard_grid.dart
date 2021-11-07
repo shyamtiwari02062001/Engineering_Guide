@@ -1,3 +1,4 @@
+import 'package:engineering_guide/screens/syllabus.dart';
 import 'package:flutter/material.dart';
 
 class DashboardGrid extends StatelessWidget {
@@ -12,31 +13,35 @@ class DashboardGrid extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.44,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.description,
-                          size: 80,
-                          color: Color(0xFFFFD54F),
-                        ),
-                        Text(
-                          "Syllabus",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFFFD54F)),
-                        ),
-                      ],
+              GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .pushReplacementNamed(Syllabus.routeName),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.44,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: const [
+                          Icon(
+                            Icons.description,
+                            size: 80,
+                            color: Color(0xFFFFD54F),
+                          ),
+                          Text(
+                            "Syllabus",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFFD54F)),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

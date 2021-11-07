@@ -5,6 +5,7 @@ import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ChipList extends StatefulWidget {
   final String courseName;
@@ -16,6 +17,12 @@ class ChipList extends StatefulWidget {
 
 class _ChipListState extends State<ChipList> {
   int isSelected = 0;
+  @override
+  void initState() {
+    FirebaseAuth.instance.signInAnonymously();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
