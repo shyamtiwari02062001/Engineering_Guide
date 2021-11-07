@@ -24,8 +24,10 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () => Navigator.of(context)
-                  .pushReplacementNamed(Syllabus.routeName),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(Syllabus.routeName);
+              },
               leading: Icon(Icons.description),
               title: Text("Syllabus"),
             ),

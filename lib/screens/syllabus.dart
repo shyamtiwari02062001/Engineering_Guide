@@ -18,24 +18,25 @@ class Syllabus extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data.docs;
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (ctx, index) {
-                final value = data[index].data();
-                if (index % 2 == 0) {
-                  return ListTile(
-                    leading: Text(value['sem']),
-                    title: Text(value['courseName']),
-                    trailing: Text(value["subject"]),
+
+            return Container(
+              height: 200,
+              child: GridView.builder(
+                itemCount: data.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 4 / 3,
+                  crossAxisSpacing: 10,
+                  mainAxisExtent: 100,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  final value = data[index].data();
+                  return Card(
+                    child: Text(value["subject"]),
                   );
-                } else {
-                  return ListTile(
-                    leading: Text(value['sem']),
-                    title: Text(value['courseName']),
-                    trailing: Text(value["subject"]),
-                  );
-                }
-              },
+                },
+              ),
             );
           }
           return const CircularProgressIndicator();

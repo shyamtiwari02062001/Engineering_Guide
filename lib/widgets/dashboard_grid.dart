@@ -14,8 +14,8 @@ class DashboardGrid extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () => Navigator.of(context)
-                    .pushReplacementNamed(Syllabus.routeName),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(Syllabus.routeName),
                 child: Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
