@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class Syllabus extends StatelessWidget {
           if (snapshot.hasData) {
             final data = snapshot.data.docs;
 
-            return Container(
+            return SizedBox(
               height: 200,
               child: GridView.builder(
                 itemCount: data.length,
@@ -32,8 +33,18 @@ class Syllabus extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final value = data[index].data();
-                  return Card(
-                    child: Text(value["subject"]),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(PdfViewers.routeName,
+                          arguments: value["url"]);
+                    },
+                    child: Card(
+                      child: Center(
+                        child: Text(
+                          value["subject"],
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),

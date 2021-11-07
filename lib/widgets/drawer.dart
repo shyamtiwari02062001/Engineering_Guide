@@ -28,8 +28,8 @@ class DrawerWidget extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed(Syllabus.routeName);
               },
-              leading: Icon(Icons.description),
-              title: Text("Syllabus"),
+              leading: const Icon(Icons.description),
+              title: const Text("Syllabus"),
             ),
             const Divider(),
             const ListTile(

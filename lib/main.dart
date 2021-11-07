@@ -1,5 +1,6 @@
 import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/screens/intro_screen.dart';
+import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/screens/syllabus.dart';
 import '/providers/shared_preference.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           routes: {
             Dashboard.routeName: (ctx) => const Dashboard(),
             Syllabus.routeName: (ctx) => const Syllabus(),
+            PdfViewers.routeName: (ctx) => const PdfViewers()
           },
         ),
       ),
