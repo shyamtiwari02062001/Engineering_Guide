@@ -1,3 +1,4 @@
+import 'package:engineering_guide/screens/syllabus.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -22,7 +23,9 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const ListTile(
+            ListTile(
+              onTap: () => Navigator.of(context)
+                  .pushReplacementNamed(Syllabus.routeName),
               leading: Icon(Icons.description),
               title: Text("Syllabus"),
             ),
