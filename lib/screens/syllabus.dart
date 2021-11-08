@@ -21,7 +21,7 @@ class Syllabus extends StatelessWidget {
             final data = snapshot.data.docs;
 
             return SizedBox(
-              height: 200,
+              height: MediaQuery.of(context).size.height,
               child: GridView.builder(
                 itemCount: data.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
