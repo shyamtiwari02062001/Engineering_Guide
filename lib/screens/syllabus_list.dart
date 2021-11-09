@@ -65,21 +65,31 @@ class _SyllabusListState extends State<SyllabusList> {
                             Orientation.portrait
                         ? 2
                         : 3,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 100,
-                    mainAxisSpacing: 10,
+                    childAspectRatio: 3 / 4,
+                    mainAxisExtent: 150,
                   ),
                   itemBuilder: (context, index) {
                     final value = data[index].data();
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(Syllabus.routeName,
-                            arguments: data[index].data());
-                      },
-                      child: Card(
-                        child: Center(
-                          child: Text(
-                            value["subject"],
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 10,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(Syllabus.routeName,
+                              arguments: data[index].data());
+                        },
+                        child: Card(
+                          child: Center(
+                            child: Text(
+                              value["subject"],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
                           ),
                         ),
                       ),

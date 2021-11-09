@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Syllabus extends StatelessWidget {
@@ -9,6 +11,26 @@ class Syllabus extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(data["subject"]),
+      ),
+      body: ListView.builder(
+        itemCount: data["moduleName"].length,
+        itemBuilder: (ctx, index) => ListTile(
+          title: Text(
+            data["moduleName"][index].toUpperCase(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          subtitle: Text(
+            data["topics"][index],
+            textAlign: TextAlign.justify,
+            style: const TextStyle(
+              fontSize: 17,
+            ),
+          ),
+        ),
       ),
     );
   }
