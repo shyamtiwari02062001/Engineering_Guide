@@ -2,6 +2,7 @@ import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/screens/intro_screen.dart';
 import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/screens/syllabus.dart';
+import 'package:engineering_guide/screens/syllabus_list.dart';
 import '/providers/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             Dashboard.routeName: (ctx) => const Dashboard(),
+            SyllabusList.routeName: (ctx) => const SyllabusList(),
             Syllabus.routeName: (ctx) => const Syllabus(),
             PdfViewers.routeName: (ctx) => const PdfViewers()
           },

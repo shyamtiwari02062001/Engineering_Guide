@@ -1,4 +1,4 @@
-import 'package:engineering_guide/screens/syllabus.dart';
+import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
 class DashboardGrid extends StatelessWidget {
@@ -15,7 +15,7 @@ class DashboardGrid extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () =>
-                    Navigator.of(context).pushNamed(Syllabus.routeName),
+                    Navigator.of(context).pushNamed(SyllabusList.routeName),
                 child: Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
