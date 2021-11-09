@@ -12,22 +12,29 @@ class Syllabus extends StatelessWidget {
       appBar: AppBar(
         title: Text(data["subject"]),
       ),
-      body: ListView.builder(
-        itemCount: data["moduleName"].length,
-        itemBuilder: (ctx, index) => ListTile(
-          title: Text(
-            data["moduleName"][index].toUpperCase(),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
+        child: ListView.builder(
+          itemCount: data["moduleName"].length,
+          itemBuilder: (ctx, index) => ListTile(
+            title: Text(
+              data["moduleName"][index].toUpperCase(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-          ),
-          contentPadding: const EdgeInsets.all(10),
-          subtitle: Text(
-            data["topics"][index],
-            textAlign: TextAlign.justify,
-            style: const TextStyle(
-              fontSize: 17,
+            contentPadding: const EdgeInsets.all(5),
+            horizontalTitleGap: 10,
+            subtitle: Text(
+              data["topics"][index],
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
         ),

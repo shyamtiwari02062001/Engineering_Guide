@@ -24,6 +24,7 @@ class _SyllabusListState extends State<SyllabusList> {
     final coursename = await val.selectedCourseData;
     await FirebaseFirestore.instance
         .collection('syllabus')
+        .orderBy("time")
         .get()
         .then((QuerySnapshot querySnapshot) {
       for (var element in querySnapshot.docs) {
@@ -82,12 +83,15 @@ class _SyllabusListState extends State<SyllabusList> {
                         },
                         child: Card(
                           child: Center(
-                            child: Text(
-                              value["subject"],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                value["subject"],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
                               ),
                             ),
                           ),
