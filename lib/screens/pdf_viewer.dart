@@ -10,7 +10,6 @@ class PdfViewers extends StatefulWidget {
 
 class _PdfViewers extends State<PdfViewers> {
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
-
   @override
   void initState() {
     super.initState();
@@ -18,12 +17,14 @@ class _PdfViewers extends State<PdfViewers> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pdf'),
+        title: Text(args["BookName"]),
       ),
       body: SfPdfViewer.network(
-        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+        args["pdfUrl"],
         key: _pdfViewerKey,
       ),
     );
