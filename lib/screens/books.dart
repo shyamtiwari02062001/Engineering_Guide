@@ -52,7 +52,7 @@ class _BooksState extends State<Books> {
         appBar: AppBar(
           title: const Text("Books"),
         ),
-        drawer: const DrawerWidget(),
+        drawer: DrawerWidget(),
         body: Consumer<SharedPreference>(
           builder: (ctx, val, _) {
             return FutureBuilder(

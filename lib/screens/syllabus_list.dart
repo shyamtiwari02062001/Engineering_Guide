@@ -51,7 +51,7 @@ class _SyllabusListState extends State<SyllabusList> {
       appBar: AppBar(
         title: const Text("Syllabus"),
       ),
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(),
       body: Consumer<SharedPreference>(
         builder: (ctx, val, _) {
           return FutureBuilder(

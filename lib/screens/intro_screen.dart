@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:engineering_guide/constants/dummy_data.dart';
 import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/widgets/checkbox.dart';
@@ -7,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'dashboard.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);
