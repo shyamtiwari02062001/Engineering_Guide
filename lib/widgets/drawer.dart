@@ -1,3 +1,4 @@
+import 'package:engineering_guide/screens/books.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +33,13 @@ class DrawerWidget extends StatelessWidget {
               title: const Text("Syllabus"),
             ),
             const Divider(),
-            const ListTile(
-              leading: Icon(Icons.menu_book),
-              title: Text("Books"),
+            ListTile(
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(Books.routeName);
+              },
+              leading: const Icon(Icons.menu_book),
+              title: const Text("Books"),
             ),
             const Divider(),
             const ListTile(
