@@ -22,6 +22,8 @@ class Dashboard extends StatelessWidget {
         .then((QuerySnapshot querySnapshot) {
       acedemicCalender = querySnapshot.docs[0]["acedemicCalender"];
       holidayCalender = querySnapshot.docs[0]["holidayCalender"];
+      print(acedemicCalender);
+      print(holidayCalender);
     });
   }
 
@@ -58,7 +60,7 @@ class Dashboard extends StatelessWidget {
                   ),
                 ),
               ),
-              DashboardGrid(acedemicCalender, holidayCalender),
+              const DashboardGrid(),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
