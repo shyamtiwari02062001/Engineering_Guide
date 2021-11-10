@@ -1,3 +1,4 @@
+import 'package:engineering_guide/screens/books.dart';
 import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/screens/intro_screen.dart';
 import 'package:engineering_guide/screens/pdf_viewer.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
             Dashboard.routeName: (ctx) => const Dashboard(),
             SyllabusList.routeName: (ctx) => const SyllabusList(),
             Syllabus.routeName: (ctx) => const Syllabus(),
+            Books.routeName: (ctx) => const Books(),
             PdfViewers.routeName: (ctx) => const PdfViewers()
           },
         ),
