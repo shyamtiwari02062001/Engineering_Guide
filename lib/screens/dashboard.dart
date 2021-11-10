@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_guide/providers/shared_preference.dart';
 import 'package:engineering_guide/widgets/chip_list.dart';
 import 'package:engineering_guide/widgets/dashboard_grid.dart';
@@ -6,10 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 String courseName = "";
+String acedemicCalender = "";
+String holidayCalender = "";
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
   static const routeName = "/dashboard";
+  Future<void> data(final val) async {
+    await val.sharedData();
+    courseName = val.selectedCourse;
+    await FirebaseFirestore.instance
+        .collection("calender")
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      acedemicCalender = querySnapshot.docs[0]["acedemicCalender"];
+      holidayCalender = querySnapshot.docs[0]["holidayCalender"];
+      print(acedemicCalender);
+      print(holidayCalender);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -18,10 +35,9 @@ class Dashboard extends StatelessWidget {
         appBar: AppBar(
           title: Consumer<SharedPreference>(
             builder: (ctx, val, _) => FutureBuilder(
-              future: val.sharedData(),
+              future: data(val),
               builder: (ctx, snap) {
-                courseName = val.selectedCourse;
-                return Text(val.selectedCourse);
+                return Text(courseName);
               },
             ),
           ),
@@ -44,7 +60,7 @@ class Dashboard extends StatelessWidget {
                   ),
                 ),
               ),
-              const DashboardGrid(),
+              DashboardGrid(acedemicCalender, holidayCalender),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(

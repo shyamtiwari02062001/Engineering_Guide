@@ -3,7 +3,11 @@ import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
 class DashboardGrid extends StatelessWidget {
-  const DashboardGrid({Key? key}) : super(key: key);
+  final acedemicCalanderUrl;
+  final holidayCalanderUrl;
+  const DashboardGrid(this.acedemicCalanderUrl, this.holidayCalanderUrl,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
