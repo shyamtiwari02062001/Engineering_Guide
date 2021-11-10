@@ -1,4 +1,5 @@
 import 'package:engineering_guide/screens/books.dart';
+import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
@@ -120,60 +121,74 @@ class DashboardGrid extends StatelessWidget {
                   ),
                 ),
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.29,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.date_range,
-                          size: 60,
-                          color: Color(0xFF66BBFA),
-                        ),
-                        Text(
-                          "Calender",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF66BBFA)),
-                        )
-                      ],
+              GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .pushNamed(PdfViewers.routeName, arguments: {
+                  "BookName": "Acedemic Calender",
+                  "pdfUrl": acedemicCalanderUrl,
+                }),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.29,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: const [
+                          Icon(
+                            Icons.date_range,
+                            size: 60,
+                            color: Color(0xFF66BBFA),
+                          ),
+                          Text(
+                            "Calender",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF66BBFA)),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.29,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.event,
-                          size: 60,
-                          color: Color(0xFFAB47BC),
-                        ),
-                        Text(
-                          "Holiday List",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFAB47BC)),
-                        )
-                      ],
+              GestureDetector(
+                onTap: () => Navigator.of(context)
+                    .pushNamed(PdfViewers.routeName, arguments: {
+                  "BookName": "Holiday Calender",
+                  "pdfUrl": holidayCalanderUrl,
+                }),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.29,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: const [
+                          Icon(
+                            Icons.event,
+                            size: 60,
+                            color: Color(0xFFAB47BC),
+                          ),
+                          Text(
+                            "Holiday List",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFAB47BC)),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
