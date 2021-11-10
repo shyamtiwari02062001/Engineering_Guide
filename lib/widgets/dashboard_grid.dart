@@ -4,8 +4,8 @@ import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
 class DashboardGrid extends StatelessWidget {
-  final acedemicCalanderUrl;
-  final holidayCalanderUrl;
+  final String acedemicCalanderUrl;
+  final String holidayCalanderUrl;
   const DashboardGrid(this.acedemicCalanderUrl, this.holidayCalanderUrl,
       {Key? key})
       : super(key: key);
