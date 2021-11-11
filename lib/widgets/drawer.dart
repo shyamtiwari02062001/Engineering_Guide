@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_guide/providers/shared_preference.dart';
 import 'package:engineering_guide/screens/books.dart';
 import 'package:engineering_guide/screens/pdf_viewer.dart';
+import 'package:engineering_guide/screens/settings.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import "../screens/settings.dart";
 
 // ignore: must_be_immutable
 class DrawerWidget extends StatelessWidget {
@@ -12,9 +14,11 @@ class DrawerWidget extends StatelessWidget {
   String courseName = "";
   String acedemicCalanderUrl = "";
   String holidayCalanderUrl = "";
+  int sem = 0;
   Future<void> data(final val) async {
     await val.sharedData();
     courseName = val.selectedCourse;
+    sem = val.semIndex;
     await FirebaseFirestore.instance
         .collection("calender")
         .get()
@@ -105,9 +109,12 @@ class DrawerWidget extends StatelessWidget {
                         title: Text("Carrer Path"),
                       ),
                       const Divider(),
-                      const ListTile(
-                        leading: Icon(Icons.settings),
-                        title: Text("Settings"),
+                      ListTile(
+                        onTap: () => Navigator.of(context).pushNamed(
+                            Setting.routeName,
+                            arguments: sem.toInt()),
+                        leading: const Icon(Icons.settings),
+                        title: const Text("Settings"),
                       ),
                       const Divider(),
                     ],

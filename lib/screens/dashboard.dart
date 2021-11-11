@@ -22,8 +22,6 @@ class Dashboard extends StatelessWidget {
         .then((QuerySnapshot querySnapshot) {
       acedemicCalender = querySnapshot.docs[0]["acedemicCalender"];
       holidayCalender = querySnapshot.docs[0]["holidayCalender"];
-      print(acedemicCalender);
-      print(holidayCalender);
     });
   }
 
@@ -48,6 +46,7 @@ class Dashboard extends StatelessWidget {
             children: [
               SizedBox(
                 height: 60,
+                width: MediaQuery.of(context).size.width,
                 child: ChipList(courseName),
               ),
               const Align(

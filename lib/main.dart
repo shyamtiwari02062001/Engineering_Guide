@@ -2,6 +2,7 @@ import 'package:engineering_guide/screens/books.dart';
 import 'package:engineering_guide/screens/dashboard.dart';
 import 'package:engineering_guide/screens/intro_screen.dart';
 import 'package:engineering_guide/screens/pdf_viewer.dart';
+import 'package:engineering_guide/screens/settings.dart';
 import 'package:engineering_guide/screens/syllabus.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import '/providers/shared_preference.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
             SyllabusList.routeName: (ctx) => const SyllabusList(),
             Syllabus.routeName: (ctx) => const Syllabus(),
             Books.routeName: (ctx) => const Books(),
+            Setting.routeName: (ctx) => const Setting(),
             PdfViewers.routeName: (ctx) => const PdfViewers()
           },
         ),
