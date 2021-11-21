@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_guide/screens/books.dart';
+import 'package:engineering_guide/screens/holiday_list.dart';
 import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
@@ -169,10 +170,7 @@ class DashboardGrid extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => Navigator.of(context)
-                          .pushNamed(PdfViewers.routeName, arguments: {
-                        "BookName": "Holiday Calender",
-                        "pdfUrl": holidayCalanderUrl,
-                      }),
+                          .pushNamed(HolidayList.routeName),
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
