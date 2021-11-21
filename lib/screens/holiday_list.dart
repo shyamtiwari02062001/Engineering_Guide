@@ -49,7 +49,10 @@ class _HolidayListState extends State<HolidayList> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+            margin: const EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: 5,
+            ),
             child: Table(
               border: TableBorder.all(),
               columnWidths: const <int, TableColumnWidth>{
@@ -108,41 +111,41 @@ class _HolidayListState extends State<HolidayList> {
                   TableRow(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           '${i + 1}',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           event[i],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           date[i],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           noOfDays[i],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
