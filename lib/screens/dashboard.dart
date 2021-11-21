@@ -65,7 +65,7 @@ class Dashboard extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
                   child: Text(
-                    "Carrer Path",
+                    "Career Path",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
