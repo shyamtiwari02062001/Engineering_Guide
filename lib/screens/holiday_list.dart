@@ -44,118 +44,119 @@ class _HolidayListState extends State<HolidayList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Holiday Calander"),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 5,
-            ),
-            child: Table(
-              border: TableBorder.all(),
-              columnWidths: const <int, TableColumnWidth>{
-                0: FixedColumnWidth(45),
-                1: FlexColumnWidth(64),
-                2: FlexColumnWidth(64),
-                3: FixedColumnWidth(100),
-                4: FixedColumnWidth(0)
-              },
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: <TableRow>[
+      appBar: AppBar(
+        title: const Text("Holiday Calander"),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 5,
+          ),
+          child: Table(
+            border: TableBorder.all(),
+            columnWidths: const <int, TableColumnWidth>{
+              0: FixedColumnWidth(45),
+              1: FlexColumnWidth(64),
+              2: FlexColumnWidth(64),
+              3: FixedColumnWidth(100),
+              4: FixedColumnWidth(0)
+            },
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: <TableRow>[
+              TableRow(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 20,
+                    child: Text(
+                      "S.No",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                    child: Text(
+                      "Holidays",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                    child: Text(
+                      "Dates",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                    child: Text(
+                      "No of Days",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                  ),
+                ],
+              ),
+              for (var i = 0; i < date.length; i++)
                 TableRow(
                   children: <Widget>[
-                    const SizedBox(
-                      height: 20,
+                    Container(
+                      padding: const EdgeInsets.all(5),
                       child: Text(
-                        "S.No",
+                        '${i + 1}',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                      child: Text(
-                        "Holidays",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                      child: Text(
-                        "Dates",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                      child: Text(
-                        "No of Days",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                     Container(
-                      height: 40,
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        event[i],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        date[i],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        noOfDays[i],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(),
                   ],
                 ),
-                for (var i = 0; i < date.length; i++)
-                  TableRow(
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          '${i + 1}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          event[i],
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          date[i],
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          noOfDays[i],
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Container(),
-                    ],
-                  ),
-              ],
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
