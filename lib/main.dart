@@ -32,9 +32,8 @@ class MyApp extends StatelessWidget {
       child: Consumer<SharedPreference>(
         builder: (ctx, val, _) => MaterialApp(
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.indigo,
-            ).copyWith(secondary: Colors.lightGreenAccent),
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal)
+                .copyWith(secondary: Colors.lightGreenAccent),
           ),
           home: FutureBuilder(
             future: val.sharedData(),

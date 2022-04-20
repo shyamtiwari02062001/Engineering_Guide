@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_guide/screens/books.dart';
 import 'package:engineering_guide/screens/holiday_list.dart';
-import 'package:engineering_guide/screens/pdf_viewer.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 
@@ -133,11 +132,11 @@ class DashboardGrid extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(PdfViewers.routeName, arguments: {
-                        "BookName": "Acedemic Calender",
-                        "pdfUrl": acedemicCalanderUrl,
-                      }),
+                      // onTap: () => Navigator.of(context)
+                      //     .pushNamed(PdfViewers.routeName, arguments: {
+                      //   "BookName": "Acedemic Calender",
+                      //   "pdfUrl": acedemicCalanderUrl,
+                      // }),
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
@@ -151,12 +150,12 @@ class DashboardGrid extends StatelessWidget {
                             child: Column(
                               children: const [
                                 Icon(
-                                  Icons.date_range,
+                                  Icons.notes,
                                   size: 60,
                                   color: Color(0xFF66BBFA),
                                 ),
                                 Text(
-                                  "Calender",
+                                  "Notes",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,

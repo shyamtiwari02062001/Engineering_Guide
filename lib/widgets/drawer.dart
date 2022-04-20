@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engineering_guide/providers/shared_preference.dart';
 import 'package:engineering_guide/screens/books.dart';
-import 'package:engineering_guide/screens/pdf_viewer.dart';
+import 'package:engineering_guide/screens/holiday_list.dart';
 import 'package:engineering_guide/screens/settings.dart';
 import 'package:engineering_guide/screens/syllabus_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screens/dashboard.dart';
 import "../screens/settings.dart";
 
 // ignore: must_be_immutable
@@ -19,13 +19,6 @@ class DrawerWidget extends StatelessWidget {
     await val.sharedData();
     courseName = val.selectedCourse;
     sem = val.semIndex;
-    await FirebaseFirestore.instance
-        .collection("calender")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      acedemicCalanderUrl = querySnapshot.docs[0]["acedemicCalender"];
-      holidayCalanderUrl = querySnapshot.docs[0]["holidayCalender"];
-    });
   }
 
   @override
@@ -41,7 +34,7 @@ class DrawerWidget extends StatelessWidget {
                     children: [
                       Container(
                         height: 150,
-                        color: Colors.indigo,
+                        color: Colors.teal,
                         child: Center(
                           child: Text(
                             courseName,
@@ -56,9 +49,18 @@ class DrawerWidget extends StatelessWidget {
                       ),
                       ListTile(
                         onTap: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(Dashboard.routeName);
+                        },
+                        leading: const Icon(Icons.home),
+                        title: const Text("Home"),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        onTap: () {
                           Navigator.of(context).pop();
                           Navigator.of(context)
-                              .pushNamed(SyllabusList.routeName);
+                              .pushReplacementNamed(SyllabusList.routeName);
                         },
                         leading: const Icon(Icons.description),
                         title: const Text("Syllabus"),
@@ -67,10 +69,21 @@ class DrawerWidget extends StatelessWidget {
                       ListTile(
                         onTap: () {
                           Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed(Books.routeName);
+                          Navigator.of(context)
+                              .pushReplacementNamed(Books.routeName);
                         },
                         leading: const Icon(Icons.menu_book),
                         title: const Text("Books"),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context)
+                              .pushReplacementNamed(Books.routeName);
+                        },
+                        leading: const Icon(Icons.notes),
+                        title: const Text("Notes"),
                       ),
                       const Divider(),
                       const ListTile(
@@ -82,23 +95,7 @@ class DrawerWidget extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pop();
                           Navigator.of(context)
-                              .pushNamed(PdfViewers.routeName, arguments: {
-                            "BookName": "Acedemic Calender",
-                            "pdfUrl": acedemicCalanderUrl,
-                          });
-                        },
-                        leading: const Icon(Icons.date_range),
-                        title: const Text("Accedemic Calender"),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context)
-                              .pushNamed(PdfViewers.routeName, arguments: {
-                            "BookName": "Holiday Calender",
-                            "pdfUrl": holidayCalanderUrl,
-                          });
+                              .pushNamed(HolidayList.routeName);
                         },
                         leading: const Icon(Icons.event),
                         title: const Text("Holiday Calender"),
@@ -110,7 +107,7 @@ class DrawerWidget extends StatelessWidget {
                       ),
                       const Divider(),
                       ListTile(
-                        onTap: () => Navigator.of(context).pushNamed(
+                        onTap: () => Navigator.of(context).pushReplacementNamed(
                             Setting.routeName,
                             arguments: sem.toInt()),
                         leading: const Icon(Icons.settings),
